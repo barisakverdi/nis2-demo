@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { cn } from "@/lib/utils"
+import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import {
   Field,
@@ -11,21 +12,16 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 
-// Mock user credentials
-const MOCK_USER = {
-  email: "demo@nis2.com",
-  password: "Demo123!"
-}
-
 export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"form">) {
   const router = useRouter()
+  const { login } = useAuth()
   const [error, setError] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setError("")
     setIsLoading(true)
@@ -34,15 +30,19 @@ export function LoginForm({
     const email = formData.get("email") as string
     const password = formData.get("password") as string
 
-    // Mock authentication check
-    if (email === MOCK_USER.email && password === MOCK_USER.password) {
-      // Simulate API delay
-      setTimeout(() => {
+    try {
+      // Use auth context login
+      const success = await login(email, password)
+
+      if (success) {
         router.push("/")
-      }, 500)
-    } else {
+      } else {
+        setError("Invalid email or password")
+      }
+    } catch (err) {
+      setError("An error occurred. Please try again.")
+    } finally {
       setIsLoading(false)
-      setError("Invalid email or password")
     }
   }
 

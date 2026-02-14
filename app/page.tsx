@@ -1,12 +1,32 @@
+"use client"
+
+import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { LogOut } from "lucide-react"
 
 export default function Home() {
+  const { logout, isLoading } = useAuth()
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <p>Loading...</p>
+      </div>
+    )
+  }
+
   return (
     <div className="container mx-auto p-8">
-      <h1 className="text-3xl font-bold mb-8">shadcn/ui Test</h1>
+      <div className="flex justify-between items-center mb-8">
+        <h1 className="text-3xl font-bold">NIS2 Demo - Anasayfa</h1>
+        <Button variant="outline" onClick={logout}>
+          <LogOut className="mr-2 h-4 w-4" />
+          Çıkış Yap
+        </Button>
+      </div>
 
       <div className="space-y-8">
         {/* Buttons Test */}
