@@ -1,12 +1,14 @@
 "use client"
 
+import { useState } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { LogOut } from "lucide-react"
+import { Shield, ArrowLeft } from "lucide-react"
 
 export default function OnboardingPage() {
-  const { completeOnboarding, logout, isLoading } = useAuth()
+  const { completeOnboarding, isLoading } = useAuth()
+  const [currentStep, setCurrentStep] = useState(1)
+  const totalSteps = 2
 
   if (isLoading) {
     return (
@@ -16,44 +18,104 @@ export default function OnboardingPage() {
     )
   }
 
-  const handleComplete = () => {
-    completeOnboarding()
+  const handleNext = () => {
+    if (currentStep < totalSteps) {
+      setCurrentStep(currentStep + 1)
+    } else {
+      completeOnboarding()
+    }
   }
 
+  const handleBack = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1)
+    }
+  }
+
+  const stepConfig = {
+    1: {
+      title: "Size & Financial Thresholds",
+      description: "Provide information about your organization's size and financial status to determine applicable NIS2 cybersecurity requirements."
+    },
+    2: {
+      title: "Sector Classification",
+      description: "Select your organization's primary sector to receive industry-specific cybersecurity standards and risk assessment."
+    }
+  }
+
+  const currentConfig = stepConfig[currentStep as keyof typeof stepConfig]
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-muted/50">
-      <div className="w-full max-w-2xl mx-4 space-y-4">
-        <div className="flex justify-end">
-          <Button variant="outline" size="sm" onClick={logout}>
-            <LogOut className="mr-2 h-4 w-4" />
-            Çıkış Yap
-          </Button>
+    <div className="flex min-h-screen">
+      {/* Left Side - Dark Background */}
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 p-12 flex-col justify-between">
+        {/* Logo */}
+        <div className="flex items-center gap-3">
+          <div className="flex items-center justify-center w-10 h-10 rounded-button bg-primary">
+            <Shield className="h-5 w-5 text-primary-foreground" />
+          </div>
+          <span className="text-h4 text-white font-semibold">NIS2 Demo</span>
         </div>
 
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-3xl">Hoş Geldiniz! 👋</CardTitle>
-            <CardDescription>
-              NIS2 Demo Onboarding Sürecine Hoş Geldiniz
-            </CardDescription>
-          </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-4">
-            <p className="text-muted-foreground">
-              Bu sayfa, uygulamaya ilk kez giriş yapan kullanıcılar için onboarding sürecini temsil eder.
+        {/* Main Content */}
+        <div className="space-y-6">
+          <h1 className="text-display-md text-white font-bold leading-tight">
+            Strengthen Your Cybersecurity
+          </h1>
+          <p className="text-body-lg text-slate-300 max-w-lg">
+            Assess your organization's cybersecurity level under the NIS2 directive.
+            Enhance your security with comprehensive analysis and personalized recommendations.
+          </p>
+        </div>
+
+        {/* Footer */}
+        <p className="text-body-sm text-slate-500">
+          © 2026 NIS2 Demo. All rights reserved.
+        </p>
+      </div>
+
+      {/* Right Side - Form Area */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-slate-50">
+        <div className="w-full max-w-xl space-y-10">
+          {/* Header: Step Indicator + Title + Description */}
+          <div>
+            <p className="text-[13px] text-primary font-medium uppercase tracking-wider mb-4">
+              STEP {currentStep} OF {totalSteps}
             </p>
-            <p className="text-muted-foreground">
-              İleride burada şirket profili, kullanıcı tercihleri ve diğer başlangıç ayarları yer alacak.
+
+            <h2 className="text-h2 font-semibold tracking-tight mb-3">{currentConfig.title}</h2>
+            <p className="text-body-md text-muted-foreground">
+              {currentConfig.description}
             </p>
           </div>
 
-          <div className="pt-4">
-            <Button onClick={handleComplete} size="lg" className="w-full">
-              Onboarding'i Tamamla
+          {/* Form Area - Placeholder */}
+          <div className="space-y-6 min-h-[200px]">
+            {/* Form içeriği buraya gelecek */}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex items-center justify-between">
+            {currentStep > 1 && (
+              <Button
+                variant="ghost"
+                onClick={handleBack}
+                size="lg"
+                className="rounded-button"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+            )}
+            <Button
+              onClick={handleNext}
+              size="lg"
+              className={`rounded-button hover:shadow-button-hover shadow-transition ${currentStep === 1 ? "ml-auto" : ""}`}
+            >
+              {currentStep < totalSteps ? "Continue" : "Complete"}
             </Button>
           </div>
-        </CardContent>
-        </Card>
+        </div>
       </div>
     </div>
   )
