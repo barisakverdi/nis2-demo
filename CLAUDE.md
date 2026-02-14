@@ -244,8 +244,36 @@ export function Button({ variant = 'primary', ...props }: ButtonProps) {
 ## 📝 Önemli Noktalar
 
 ### Authentication Mock
+
+**🔐 Login Bilgileri:**
+```
+Email    : demo@nis2.com
+Password : Demo123!
+```
+
+**Uygulama:**
+- Login sayfası: `http://localhost:3000/login`
+- Başarılı giriş sonrası ana sayfaya yönlendirme
+- Hatalı giriş durumunda hata mesajı gösterimi
+
+**Kod Implementasyonu:**
 ```typescript
-// lib/mock-data/users.ts
+// components/login-form.tsx
+const MOCK_USER = {
+  email: "demo@nis2.com",
+  password: "Demo123!"
+}
+
+// Mock authentication check
+if (email === MOCK_USER.email && password === MOCK_USER.password) {
+  router.push("/") // Ana sayfaya yönlendir
+} else {
+  setError("Invalid email or password")
+}
+```
+
+```typescript
+// lib/mock-data/users.ts (İleride kullanılacak - çoklu kullanıcı için)
 export const MOCK_USERS = [
   { email: 'demo@nis2.com', password: 'Demo123!', role: 'admin' },
   { email: 'user@company.com', password: 'User123!', role: 'user' }
