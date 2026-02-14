@@ -15,6 +15,13 @@ export function QuestionCard({ question, selectedAnswer, onAnswerChange }: Quest
   return (
     <div className="card rounded-card shadow-card">
       <div className="card-content">
+        {/* Assessment Type Badge */}
+        <div className="inline-flex items-center px-3 py-1.5 rounded-md bg-primary/10 border border-primary/20 mb-6">
+          <span className="text-[11px] font-semibold text-primary tracking-wider">
+            EXAMPLE COMPANY - NIS2 ASSESSMENT TYPE: ESSENTIAL
+          </span>
+        </div>
+
         {/* Question */}
         <h2 className="text-h3 mb-2">{question.question}</h2>
 

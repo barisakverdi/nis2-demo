@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import {
@@ -41,6 +42,7 @@ const assessmentSteps = [
 ]
 
 export default function Home() {
+  const router = useRouter()
   const { logout, isLoading } = useAuth()
   const [currentStep, setCurrentStep] = useState(1)
   const [answers, setAnswers] = useState<Record<string, string>>({})
@@ -86,6 +88,11 @@ export default function Home() {
     if (currentStep < assessmentSteps.length) {
       setCurrentStep(currentStep + 1)
     }
+  }
+
+  const handleSubmit = () => {
+    // Navigate to results page
+    router.push("/results")
   }
 
   const handlePrev = () => {
@@ -222,15 +229,25 @@ export default function Home() {
               </span>
             </div>
 
-            {/* Next Button */}
-            <Button
-              onClick={handleNext}
-              disabled={currentStep === assessmentSteps.length || !isCurrentStepAnswered}
-              className="rounded-button hover:shadow-button-hover shadow-transition shrink-0"
-            >
-              Next
-              <ArrowRight className="h-4 w-4 ml-2" />
-            </Button>
+            {/* Next/Submit Button */}
+            {currentStep === assessmentSteps.length ? (
+              <Button
+                onClick={handleSubmit}
+                className="rounded-button hover:shadow-button-hover shadow-transition shrink-0"
+              >
+                Submit
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            ) : (
+              <Button
+                onClick={handleNext}
+                disabled={!isCurrentStepAnswered}
+                className="rounded-button hover:shadow-button-hover shadow-transition shrink-0"
+              >
+                Next
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            )}
           </div>
         </footer>
       </main>
