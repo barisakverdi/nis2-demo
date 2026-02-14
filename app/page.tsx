@@ -78,16 +78,11 @@ export default function Home() {
       <aside className="w-100 bg-white border-r border-slate-200 flex flex-col">
         {/* Header */}
         <div className="p-6">
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2.5">
-              <div className="flex items-center justify-center w-8 h-8 rounded-button bg-primary">
-                <Shield className="h-4 w-4 text-primary-foreground" />
-              </div>
-              <span className="text-body-lg font-semibold">NIS2 Demo</span>
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="flex items-center justify-center w-8 h-8 rounded-button bg-primary">
+              <Shield className="h-4 w-4 text-primary-foreground" />
             </div>
-            <Button variant="ghost" size="icon" onClick={logout} title="Logout">
-              <LogOut className="h-4 w-4" />
-            </Button>
+            <span className="text-body-lg font-semibold">NIS2 Demo</span>
           </div>
           <div>
             <h1 className="text-h5 font-semibold mb-1.5">Cybersecurity Assessment</h1>
@@ -133,13 +128,22 @@ export default function Home() {
       <main className="flex-1 flex flex-col">
         {/* Content Header */}
         <header className="sticky top-0 z-20 bg-white border-b border-slate-200 p-6">
-          <div className="max-w-4xl mx-auto">
-            <p className="text-[13px] text-primary font-medium uppercase tracking-wider mb-2">
-              CATEGORY {currentStep} OF {assessmentSteps.length}
-            </p>
-            <h2 className="text-h3 font-semibold tracking-tight">
-              {currentStepData.title}
-            </h2>
+          <div className="flex items-start justify-between">
+            <div className="max-w-4xl mx-auto flex-1">
+              <p className="text-[13px] text-primary font-medium uppercase tracking-wider mb-2">
+                CATEGORY {currentStep} OF {assessmentSteps.length}
+              </p>
+              <h2 className="text-h3 font-semibold tracking-tight">
+                {currentStepData.title}
+              </h2>
+            </div>
+            <button
+              onClick={logout}
+              title="Logout"
+              className="shrink-0 cursor-pointer p-2 rounded-md"
+            >
+              <LogOut className="h-5 w-5" />
+            </button>
           </div>
         </header>
 
