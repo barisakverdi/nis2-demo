@@ -13,6 +13,8 @@ import {
   StepperTitle,
 } from "@/components/ui/stepper"
 import { Shield, LogOut, ArrowRight, ArrowLeft, Check } from "lucide-react"
+import { SURVEY_QUESTIONS } from "@/lib/mock-data/questions"
+import { QuestionCard } from "@/components/survey/question-card"
 
 // NIS2 Assessment Categories
 const assessmentSteps = [
@@ -41,6 +43,7 @@ const assessmentSteps = [
 export default function Home() {
   const { logout, isLoading } = useAuth()
   const [currentStep, setCurrentStep] = useState(1)
+  const [answers, setAnswers] = useState<Record<string, string>>({})
 
   // Scroll to current step when it changes (from sidebar click)
   useEffect(() => {
@@ -49,6 +52,27 @@ export default function Home() {
       element.scrollIntoView({ behavior: "smooth", block: "center" })
     }
   }, [currentStep])
+
+  // Handle answer change
+  const handleAnswerChange = (questionId: string, answerId: string) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: answerId,
+    }))
+  }
+
+  // Get the current question
+  // For steps 1-3: Show their respective questions
+  // For steps 4+: Show the 3rd question (stepIndex 2)
+  const currentQuestion = currentStep <= 3
+    ? SURVEY_QUESTIONS.find((q) => q.stepIndex === currentStep - 1)
+    : SURVEY_QUESTIONS.find((q) => q.stepIndex === 2) // Always show 3rd question after step 3
+
+  // Check if current step has been answered (for validation)
+  // Only validate for steps 1-3, allow progression for steps 4+
+  const isCurrentStepAnswered = currentStep <= 3
+    ? (currentQuestion ? !!answers[currentQuestion.id] : false)
+    : true
 
   if (isLoading) {
     return (
@@ -147,14 +171,26 @@ export default function Home() {
           </div>
         </header>
 
-        {/* Content Body - Empty for now */}
+        {/* Content Body */}
         <div className="flex-1 p-6 overflow-y-auto">
           <div className="max-w-4xl mx-auto">
-            <div className="bg-white rounded-lg border border-slate-200 p-8 min-h-100 flex items-center justify-center">
-              <p className="text-body-lg text-muted-foreground">
-                Survey questions will appear here
-              </p>
-            </div>
+            {currentQuestion ? (
+              <QuestionCard
+                question={currentQuestion}
+                selectedAnswer={answers[currentQuestion.id]}
+                onAnswerChange={handleAnswerChange}
+              />
+            ) : (
+              <div className="card rounded-card shadow-card">
+                <div className="card-content">
+                  <div className="flex items-center justify-center min-h-100">
+                    <p className="text-body-lg text-muted-foreground">
+                      No question available for this step yet
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 
@@ -189,7 +225,7 @@ export default function Home() {
             {/* Next Button */}
             <Button
               onClick={handleNext}
-              disabled={currentStep === assessmentSteps.length}
+              disabled={currentStep === assessmentSteps.length || !isCurrentStepAnswered}
               className="rounded-button hover:shadow-button-hover shadow-transition shrink-0"
             >
               Next
