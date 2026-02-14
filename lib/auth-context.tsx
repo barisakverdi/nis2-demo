@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from "react"
 import { useRouter, usePathname } from "next/navigation"
+import Cookies from "js-cookie"
 
 // Auth context type
 interface AuthContextType {
@@ -30,7 +31,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   // Check authentication status on mount
   useEffect(() => {
     const checkAuth = () => {
-      const authToken = localStorage.getItem("auth_token")
+      const authToken = Cookies.get("auth_token")
       const isLoggedIn = authToken === "authenticated"
       setIsAuthenticated(isLoggedIn)
       setIsLoading(false)
@@ -55,9 +56,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       // Simulate API delay
       await new Promise(resolve => setTimeout(resolve, 500))
 
-      // Set authentication
-      localStorage.setItem("auth_token", "authenticated")
-      localStorage.setItem("user_email", email)
+      // Set authentication cookie (expires in 7 days)
+      Cookies.set("auth_token", "authenticated", { expires: 7 })
+      Cookies.set("user_email", email, { expires: 7 })
       setIsAuthenticated(true)
 
       return true
@@ -68,8 +69,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Logout function
   const logout = () => {
-    localStorage.removeItem("auth_token")
-    localStorage.removeItem("user_email")
+    Cookies.remove("auth_token")
+    Cookies.remove("user_email")
     setIsAuthenticated(false)
     router.push("/login")
   }
