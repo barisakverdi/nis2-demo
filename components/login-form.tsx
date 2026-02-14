@@ -32,10 +32,15 @@ export function LoginForm({
 
     try {
       // Use auth context login
-      const success = await login(email, password)
+      const result = await login(email, password)
 
-      if (success) {
-        router.push("/")
+      if (result.success) {
+        // Redirect based on onboarding status
+        if (result.needsOnboarding) {
+          router.push("/onboarding")
+        } else {
+          router.push("/")
+        }
       } else {
         setError("Invalid email or password")
       }

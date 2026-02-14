@@ -7,8 +7,9 @@ import Cookies from "js-cookie"
 // Auth context type
 interface AuthContextType {
   isAuthenticated: boolean
-  login: (email: string, password: string) => Promise<boolean>
+  login: (email: string, password: string) => Promise<{ success: boolean; needsOnboarding: boolean }>
   logout: () => void
+  completeOnboarding: () => void
   isLoading: boolean
 }
 
@@ -33,6 +34,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const checkAuth = () => {
       const authToken = Cookies.get("auth_token")
       const isLoggedIn = authToken === "authenticated"
+      const onboardingCompleted = Cookies.get("onboarding_completed") === "true"
+
       setIsAuthenticated(isLoggedIn)
       setIsLoading(false)
 
@@ -40,9 +43,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (!isLoggedIn && pathname !== "/login") {
         router.push("/login")
       }
-      // Redirect to home if already authenticated and on login page
-      else if (isLoggedIn && pathname === "/login") {
-        router.push("/")
+      // If authenticated, only check if user is on wrong page
+      else if (isLoggedIn && pathname !== "/login") {
+        // Redirect to onboarding if not completed and not already there
+        if (!onboardingCompleted && pathname !== "/onboarding") {
+          router.push("/onboarding")
+        }
+        // Redirect to home if onboarding completed but still on onboarding page
+        else if (onboardingCompleted && pathname === "/onboarding") {
+          router.push("/")
+        }
       }
     }
 
@@ -50,7 +60,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [pathname, router])
 
   // Login function
-  const login = async (email: string, password: string): Promise<boolean> => {
+  const login = async (email: string, password: string): Promise<{ success: boolean; needsOnboarding: boolean }> => {
     // Mock authentication check
     if (email === MOCK_USER.email && password === MOCK_USER.password) {
       // Simulate API delay
@@ -61,18 +71,28 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       Cookies.set("user_email", email, { expires: 7 })
       setIsAuthenticated(true)
 
-      return true
+      // Check if onboarding is completed
+      const onboardingCompleted = Cookies.get("onboarding_completed") === "true"
+
+      return { success: true, needsOnboarding: !onboardingCompleted }
     }
 
-    return false
+    return { success: false, needsOnboarding: false }
   }
 
   // Logout function
   const logout = () => {
     Cookies.remove("auth_token")
     Cookies.remove("user_email")
+    Cookies.remove("onboarding_completed")
     setIsAuthenticated(false)
     router.push("/login")
+  }
+
+  // Complete onboarding function
+  const completeOnboarding = () => {
+    Cookies.set("onboarding_completed", "true", { expires: 7 })
+    router.push("/")
   }
 
   return (
@@ -81,6 +101,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         isAuthenticated,
         login,
         logout,
+        completeOnboarding,
         isLoading
       }}
     >
