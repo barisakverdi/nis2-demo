@@ -1,76 +1,76 @@
-# NIS2 Demo - Siber Güvenlik Anket Uygulaması
+# NIS2 Demo - Cybersecurity Survey Application
 
-## 🎯 Proje Amacı
-Şirketlerin siber güvenlik durumunu analiz etmek için tasarlanmış, görselliği ön planda tutan bir anket uygulaması. Bu proje, ileride geliştirilecek tam kapsamlı projenin demo versiyonudur.
+## 🎯 Project Purpose
+A visually-focused survey application designed to analyze companies' cybersecurity status. This project is a demo version of a full-scale application to be developed in the future.
 
 ## 🛠 Tech Stack
 - **Framework**: Next.js 15+ (App Router)
-- **UI Kütüphanesi**: shadcn/ui
+- **UI Library**: shadcn/ui
 - **Styling**: Tailwind CSS
-- **Data Yönetimi**: Frontend mock data (DB kullanılmayacak)
-- **State Management**: React Context API / Zustand (ihtiyaç durumunda)
-- **Form Yönetimi**: React Hook Form + Zod validation
-- **İkonlar**: Lucide React
+- **Data Management**: Frontend mock data (no database)
+- **State Management**: React Context API / Zustand (if needed)
+- **Form Management**: React Hook Form + Zod validation
+- **Icons**: Lucide React
 
-## 📋 Uygulama Akışı
+## 📋 Application Flow
 
-### 1. Login Ekranı
-- Kullanıcı kimlik doğrulama ekranı (mock authentication)
-- Form validasyonu ile email/password kontrolü
-- Modern, güvenli görünümlü UI
+### 1. Login Screen
+- User authentication screen (mock authentication)
+- Email/password validation with form validation
+- Modern, secure-looking UI
 
-### 2. Şirket Profili
-- Şirket bilgilerinin toplandığı form
-- Alan öncelik seviyeleri:
-  - **ESSENTIAL**: Zorunlu alanlar (şirket adı, sektör, çalışan sayısı)
-  - **IMPORTANT**: Önemli ama zorunlu olmayan alanlar
-- Progressive disclosure ile kullanıcı dostu form yapısı
+### 2. Company Profile
+- Form for collecting company information
+- Field priority levels:
+  - **ESSENTIAL**: Required fields (company name, sector, employee count)
+  - **IMPORTANT**: Important but not required fields
+- User-friendly form structure with progressive disclosure
 
-### 3. Anket Uygulaması
-- Multi-step form yapısı
-- Kategorize edilmiş sorular (Ağ Güvenliği, Veri Koruma, Erişim Kontrolü, vb.)
-- Progress indicator ile ilerleme göstergesi
-- Her adımda validation
-- Geri dönme imkanı
+### 3. Survey Application
+- Multi-step form structure
+- Categorized questions (Network Security, Data Protection, Access Control, etc.)
+- Progress indicator showing advancement
+- Validation at each step
+- Ability to go back
 
-### 4. Sonuç Ekranı
-- Görsel sonuç dashboard'u
-- Güvenlik skoru ve grafikler
-- Kategori bazlı analizler
-- İndirilebilir rapor seçeneği
+### 4. Results Screen
+- Visual results dashboard
+- Security score and charts
+- Category-based analysis
+- Downloadable report option
 
-## 🎨 Design System Prensipleri
+## 🎨 Design System Principles
 
-### Renk Paleti
+### Color Palette
 ```css
-/* Siber güvenlik temalı, profesyonel renk şeması */
---primary: Mavi tonları (güvenilirlik, teknoloji)
---secondary: Koyu gri/lacivert (profesyonellik)
---accent: Turkuaz/yeşil (güvenlik, onay)
---warning: Turuncu (uyarılar)
---danger: Kırmızı (risk, tehdit)
---success: Yeşil (başarı, güvenli)
+/* Cybersecurity themed, professional color scheme */
+--primary: Blue tones (reliability, technology)
+--secondary: Dark gray/navy (professionalism)
+--accent: Turquoise/green (security, approval)
+--warning: Orange (warnings)
+--danger: Red (risk, threat)
+--success: Green (success, secure)
 ```
 
-### Tipografi
-- **Başlıklar**: Modern, okunabilir sans-serif (Inter, Geist)
-- **Body**: Rahat okunur font (system-ui fallback)
+### Typography
+- **Headings**: Modern, readable sans-serif (Inter, Geist)
+- **Body**: Comfortable reading font (system-ui fallback)
 - **Hierarchical scale**: h1 > h2 > h3 > body > small
 
 ### Spacing & Layout
 - 8px grid system (8, 16, 24, 32, 48, 64px)
-- Consistent padding/margin değerleri
+- Consistent padding/margin values
 - Max-width constraints (prose, container)
 - Responsive breakpoints (sm, md, lg, xl, 2xl)
 
 ### Component Patterns
-- **Card-based layouts**: Her bölüm card component'i içinde
+- **Card-based layouts**: Each section within a card component
 - **Consistent shadows**: Subtle elevation (shadow-sm, shadow-md)
-- **Smooth animations**: Framer Motion veya CSS transitions
+- **Smooth animations**: Framer Motion or CSS transitions
 - **Loading states**: Skeleton screens
 - **Empty states**: Meaningful placeholders
 
-## 📁 Proje Yapısı
+## 📁 Project Structure
 
 ```
 nis2-demo/
@@ -141,35 +141,35 @@ nis2-demo/
 
 ## 🔧 Development Best Practices
 
-### TypeScript Kullanımı
-- **Strict mode**: Her zaman type-safe kod yazın
-- **Interface definitions**: Tüm data structures için interface tanımlayın
-- **Avoid `any`**: Mümkün olduğunca generic types kullanın
-- **Type exports**: types/ klasöründen merkezi type export
+### TypeScript Usage
+- **Strict mode**: Always write type-safe code
+- **Interface definitions**: Define interfaces for all data structures
+- **Avoid `any`**: Use generic types whenever possible
+- **Type exports**: Centralized type export from types/ folder
 
-### Component Yazım Kuralları
+### Component Writing Rules
 ```typescript
-// ✅ İyi
+// ✅ Good
 export function QuestionCard({ question, onAnswer }: QuestionCardProps) {
   // Component logic
 }
 
-// ❌ Kötü
+// ❌ Bad
 export default function QuestionCard(props: any) {
   // Component logic
 }
 ```
 
-- **Named exports** kullanın (default export yerine)
-- **Props interface** her component için tanımlayın
-- **Composition over inheritance**: Küçük, reusable component'ler
-- **Single responsibility**: Her component tek bir işten sorumlu
+- Use **named exports** (instead of default export)
+- Define **props interface** for every component
+- **Composition over inheritance**: Small, reusable components
+- **Single responsibility**: Each component is responsible for one thing
 
 ### State Management
 - **Local state**: useState (component-specific state)
-- **Global state**: Context API veya Zustand (user auth, survey progress)
-- **Form state**: React Hook Form (tüm formlar için)
-- **Derived state**: useMemo ile hesaplanan değerler
+- **Global state**: Context API or Zustand (user auth, survey progress)
+- **Form state**: React Hook Form (for all forms)
+- **Derived state**: Calculated values with useMemo
 
 ### Data Flow - Mock Data
 ```typescript
@@ -178,9 +178,9 @@ export const SURVEY_QUESTIONS: Question[] = [
   {
     id: 'q1',
     category: 'network-security',
-    text: 'Şirketinizde firewall kullanıyor musunuz?',
+    text: 'Does your company use a firewall?',
     type: 'multiple-choice',
-    options: ['Evet', 'Hayır', 'Bilmiyorum'],
+    options: ['Yes', 'No', 'Don\'t know'],
     weight: 10,
     priority: 'essential'
   },
@@ -207,12 +207,12 @@ import { z } from 'zod'
 
 export const companyProfileSchema = z.object({
   companyName: z.string()
-    .min(2, 'Şirket adı en az 2 karakter olmalıdır')
+    .min(2, 'Company name must be at least 2 characters')
     .max(100),
-  sector: z.enum(['teknoloji', 'finans', 'saglik', 'diger']),
+  sector: z.enum(['technology', 'finance', 'healthcare', 'other']),
   employeeCount: z.number()
     .int()
-    .positive('Çalışan sayısı pozitif olmalıdır'),
+    .positive('Employee count must be positive'),
   // ... other fields
 })
 
@@ -220,10 +220,10 @@ export type CompanyProfile = z.infer<typeof companyProfileSchema>
 ```
 
 ### Styling Conventions
-- **Tailwind first**: Öncelikle Tailwind utilities kullanın
-- **Component variants**: CVA (class-variance-authority) ile variant'lar
+- **Tailwind first**: Use Tailwind utilities first
+- **Component variants**: Variants with CVA (class-variance-authority)
 - **Responsive design**: Mobile-first approach
-- **Dark mode**: (Opsiyonel) color-scheme support
+- **Dark mode**: (Optional) color-scheme support
 
 ```typescript
 // Example component with Tailwind
@@ -241,22 +241,22 @@ export function Button({ variant = 'primary', ...props }: ButtonProps) {
 }
 ```
 
-## 📝 Önemli Noktalar
+## 📝 Important Notes
 
 ### Authentication Mock
 
-**🔐 Login Bilgileri:**
+**🔐 Login Credentials:**
 ```
 Email    : demo@nis2.com
 Password : Demo123!
 ```
 
-**Uygulama:**
-- Login sayfası: `http://localhost:3000/login`
-- Başarılı giriş sonrası ana sayfaya yönlendirme
-- Hatalı giriş durumunda hata mesajı gösterimi
+**Implementation:**
+- Login page: `http://localhost:3000/login`
+- Redirect to home page after successful login
+- Show error message on failed login
 
-**Kod Implementasyonu:**
+**Code Implementation:**
 ```typescript
 // components/login-form.tsx
 const MOCK_USER = {
@@ -266,28 +266,28 @@ const MOCK_USER = {
 
 // Mock authentication check
 if (email === MOCK_USER.email && password === MOCK_USER.password) {
-  router.push("/") // Ana sayfaya yönlendir
+  router.push("/") // Redirect to home page
 } else {
   setError("Invalid email or password")
 }
 ```
 
 ```typescript
-// lib/mock-data/users.ts (İleride kullanılacak - çoklu kullanıcı için)
+// lib/mock-data/users.ts (For future use - multiple users)
 export const MOCK_USERS = [
   { email: 'demo@nis2.com', password: 'Demo123!', role: 'admin' },
   { email: 'user@company.com', password: 'User123!', role: 'user' }
 ]
 
-// Kullanıcı login kontrolü (gerçek auth yok, sadece mock)
+// User login check (no real auth, just mock)
 export function authenticateUser(email: string, password: string) {
   return MOCK_USERS.find(u => u.email === email && u.password === password)
 }
 ```
 
 ### Survey Logic
-- **Weighted scoring**: Her sorunun ağırlığı var
-- **Category grouping**: Sorular kategorilere ayrılmış
+- **Weighted scoring**: Each question has a weight
+- **Category grouping**: Questions are divided into categories
 - **Progress calculation**: (answered / total) * 100
 - **Score calculation**: Weighted average of answers
 
@@ -305,15 +305,15 @@ export function authenticateUser(email: string, password: string) {
 ## 🚀 Development Workflow
 
 ### Starting Development
-1. `npm install` - Dependencies yükle
-2. `npm run dev` - Development server başlat
-3. `http://localhost:3000` - Browser'da aç
+1. `npm install` - Install dependencies
+2. `npm run dev` - Start development server
+3. `http://localhost:3000` - Open in browser
 
 ### Adding New Components
-1. shadcn/ui component ekle: `npx shadcn@latest add [component]`
-2. Custom component oluştur: `src/components/` altında
-3. Types tanımla: `src/types/` altında
-4. Mock data ekle: `src/lib/mock-data/` altında
+1. Add shadcn/ui component: `npx shadcn@latest add [component]`
+2. Create custom component: in `src/components/`
+3. Define types: in `src/types/`
+4. Add mock data: in `src/lib/mock-data/`
 
 ### Git Commit Messages
 - `feat: Add login form with validation`
@@ -321,13 +321,13 @@ export function authenticateUser(email: string, password: string) {
 - `fix: Resolve survey progress calculation`
 - `refactor: Simplify question card component`
 
-## 🎯 Görev Önceliklendirmesi
+## 🎯 Task Prioritization
 
-### Phase 1: Temel Yapı
-- [ ] Next.js projesi kurulumu
-- [ ] shadcn/ui entegrasyonu
-- [ ] Tailwind config ve design tokens
-- [ ] Base layout ve routing
+### Phase 1: Base Structure
+- [ ] Next.js project setup
+- [ ] shadcn/ui integration
+- [ ] Tailwind config and design tokens
+- [ ] Base layout and routing
 
 ### Phase 2: Authentication
 - [ ] Login page UI
@@ -355,7 +355,7 @@ export function authenticateUser(email: string, password: string) {
 - [ ] Report download feature
 
 ### Phase 6: Polish
-- [ ] Animations ve transitions
+- [ ] Animations and transitions
 - [ ] Loading states
 - [ ] Error handling
 - [ ] Accessibility (a11y)
@@ -382,10 +382,10 @@ export function authenticateUser(email: string, password: string) {
 - Helpful messaging
 
 ## 🔒 Security Considerations (Mock Context)
-- Client-side validation (yeterli, çünkü backend yok)
+- Client-side validation (sufficient, since there's no backend)
 - Input sanitization
-- XSS prevention (Next.js otomatik escape)
-- CSRF tokens gerekli değil (statik demo)
+- XSS prevention (Next.js automatic escape)
+- CSRF tokens not required (static demo)
 
 ## 📚 Useful Resources
 - [Next.js Docs](https://nextjs.org/docs)
@@ -395,12 +395,12 @@ export function authenticateUser(email: string, password: string) {
 - [Zod Validation](https://zod.dev)
 
 ## 💡 Development Tips
-- shadcn/ui component'lerini customize etmekten çekinmeyin
-- Mock data'yı düzenli ve type-safe tutun
-- Component'leri küçük ve reusable yapın
-- Storybook düşünebilirsiniz (opsiyonel)
-- Performance'ı development sırasında test edin
+- Don't hesitate to customize shadcn/ui components
+- Keep mock data organized and type-safe
+- Make components small and reusable
+- Consider Storybook (optional)
+- Test performance during development
 
 ---
 
-**Not**: Bu dokümandaki tüm kurallar ve yapılar, demo projenin tutarlılığını ve kalitesini sağlamak içindir. Geliştirme sırasında bu rehbere sadık kalın.
+**Note**: All rules and structures in this document are to ensure consistency and quality of the demo project. Stay faithful to this guide during development.
