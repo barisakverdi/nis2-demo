@@ -9,6 +9,10 @@ export default function OnboardingPage() {
   const { completeOnboarding, isLoading } = useAuth()
   const [currentStep, setCurrentStep] = useState(1)
   const totalSteps = 2
+  const [answers, setAnswers] = useState({
+    employeeCount: "",
+    revenue: ""
+  })
 
   if (isLoading) {
     return (
@@ -89,9 +93,75 @@ export default function OnboardingPage() {
             </p>
           </div>
 
-          {/* Form Area - Placeholder */}
-          <div className="space-y-6 min-h-[200px]">
-            {/* Form içeriği buraya gelecek */}
+          {/* Form Area */}
+          <div className="space-y-6">
+            {currentStep === 1 && (
+              <>
+                {/* Question 1: Employee Count */}
+                <div className="space-y-3">
+                  <p className="text-body-md font-medium text-foreground">
+                    Does your organization have more than 50 employees?
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      data-slot="toggle-group-item"
+                      data-variant="card"
+                      data-state={answers.employeeCount === "yes" ? "on" : "off"}
+                      onClick={() => setAnswers({...answers, employeeCount: "yes"})}
+                      className="!px-6 !w-auto !h-10 !min-h-10"
+                    >
+                      Yes
+                    </button>
+                    <button
+                      type="button"
+                      data-slot="toggle-group-item"
+                      data-variant="card"
+                      data-state={answers.employeeCount === "no" ? "on" : "off"}
+                      onClick={() => setAnswers({...answers, employeeCount: "no"})}
+                      className="!px-6 !w-auto !h-10 !min-h-10"
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+
+                {/* Question 2: Revenue */}
+                <div className="space-y-3">
+                  <p className="text-body-md font-medium text-foreground">
+                    Does your annual revenue or balance sheet total exceed 10 Million Euros?
+                  </p>
+                  <div className="flex gap-3">
+                    <button
+                      type="button"
+                      data-slot="toggle-group-item"
+                      data-variant="card"
+                      data-state={answers.revenue === "yes" ? "on" : "off"}
+                      onClick={() => setAnswers({...answers, revenue: "yes"})}
+                      className="!px-6 !w-auto !h-10 !min-h-10"
+                    >
+                      Yes
+                    </button>
+                    <button
+                      type="button"
+                      data-slot="toggle-group-item"
+                      data-variant="card"
+                      data-state={answers.revenue === "no" ? "on" : "off"}
+                      onClick={() => setAnswers({...answers, revenue: "no"})}
+                      className="!px-6 !w-auto !h-10 !min-h-10"
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
+
+            {currentStep === 2 && (
+              <div className="min-h-[200px]">
+                {/* Step 2 form içeriği buraya gelecek */}
+              </div>
+            )}
           </div>
 
           {/* Action Buttons */}
@@ -100,7 +170,6 @@ export default function OnboardingPage() {
               <Button
                 variant="ghost"
                 onClick={handleBack}
-                size="lg"
                 className="rounded-button"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
@@ -109,7 +178,6 @@ export default function OnboardingPage() {
             )}
             <Button
               onClick={handleNext}
-              size="lg"
               className={`rounded-button hover:shadow-button-hover shadow-transition ${currentStep === 1 ? "ml-auto" : ""}`}
             >
               {currentStep < totalSteps ? "Continue" : "Complete"}
