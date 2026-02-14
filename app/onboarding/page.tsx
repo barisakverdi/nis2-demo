@@ -3,7 +3,8 @@
 import { useState } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
-import { Shield, ArrowLeft } from "lucide-react"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { Shield, ArrowLeft, Info } from "lucide-react"
 
 export default function OnboardingPage() {
   const { completeOnboarding, isLoading } = useAuth()
@@ -11,7 +12,8 @@ export default function OnboardingPage() {
   const totalSteps = 2
   const [answers, setAnswers] = useState({
     employeeCount: "",
-    revenue: ""
+    revenue: "",
+    sector: ""
   })
 
   if (isLoading) {
@@ -81,6 +83,15 @@ export default function OnboardingPage() {
       {/* Right Side - Form Area */}
       <div className="flex-1 flex items-center justify-center p-8 bg-slate-50">
         <div className="w-full max-w-xl space-y-10">
+          {/* Info Box */}
+          <Alert className="bg-blue-50 border-blue-200">
+            <Info className="h-4 w-4 text-blue-600" />
+            <AlertTitle className="text-blue-900 font-semibold">NIS2 Scope Wizard</AlertTitle>
+            <AlertDescription className="text-blue-800">
+              Here we will determine whether the assessment scope is ESSENTIAL or IMPORTANT according to NIS2 standards.
+            </AlertDescription>
+          </Alert>
+
           {/* Header: Step Indicator + Title + Description */}
           <div>
             <p className="text-[13px] text-primary font-medium uppercase tracking-wider mb-4">
@@ -158,8 +169,92 @@ export default function OnboardingPage() {
             )}
 
             {currentStep === 2 && (
-              <div className="min-h-[200px]">
-                {/* Step 2 form içeriği buraya gelecek */}
+              <div className="space-y-3">
+                <p className="text-body-md font-medium text-foreground">
+                  Select your organization's primary sector
+                </p>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "energy" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "energy"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Energy
+                  </button>
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "transport" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "transport"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Transport
+                  </button>
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "banking" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "banking"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Banking & Finance
+                  </button>
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "health" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "health"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Health
+                  </button>
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "water" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "water"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Water & Wastewater
+                  </button>
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "digital" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "digital"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Digital Infrastructure
+                  </button>
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "public" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "public"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Public Administration
+                  </button>
+                  <button
+                    type="button"
+                    data-slot="toggle-group-item"
+                    data-variant="card"
+                    data-state={answers.sector === "other" ? "on" : "off"}
+                    onClick={() => setAnswers({...answers, sector: "other"})}
+                    className="!px-4 !w-full !h-10 !min-h-10 !text-left"
+                  >
+                    Other
+                  </button>
+                </div>
               </div>
             )}
           </div>
