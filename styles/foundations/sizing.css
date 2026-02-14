@@ -1,0 +1,541 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 📐 NIS2 SIZING SYSTEM
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Based on UX research and industry standards:
+ * - Material Design 3: Component dimensions & breakpoints
+ * - Carbon Design System: Sizing scale
+ * - Apple Human Interface Guidelines: Touch targets
+ * - Ant Design: Container widths
+ * - Chakra UI: Component heights
+ *
+ * Research Sources:
+ * - Material Design 3: https://m3.material.io/foundations/layout
+ * - Carbon Design: https://carbondesignsystem.com/elements/layout
+ * - Apple HIG: https://developer.apple.com/design/human-interface-guidelines/layout
+ * - WCAG 2.1: Touch target minimum 44x44px (AAA: 48x48px)
+ *
+ * Philosophy:
+ * - Touch targets: Minimum 44px for mobile (WCAG AAA compliant)
+ * - Icon sizes: Powers of 2 for crisp rendering
+ * - Container widths: Reading comfort (45-75 characters per line)
+ * - Component heights: Consistent rhythm with 8px grid
+ * - Responsive scaling: Mobile-first approach
+ */
+
+@layer base {
+  :root {
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📱 CONTAINER WIDTHS
+       Based on optimal reading comfort
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /**
+     * Reading Comfort Research:
+     * - Optimal line length: 45-75 characters (UX research)
+     * - Mobile: 100% width for maximum content
+     * - Tablet: 768px breakpoint
+     * - Desktop: 1024px+ for comfortable reading
+     * - Wide screens: Max 1920px to prevent eye strain
+     *
+     * Sources:
+     * - Baymard Institute: Line length research
+     * - Material Design: Responsive layout grid
+     */
+
+    /* Container breakpoint widths (prefixed to avoid Tailwind conflicts) */
+    --breakpoint-sm: 640px; /* Mobile landscape / Small tablet */
+    --breakpoint-md: 768px; /* Tablet portrait */
+    --breakpoint-lg: 1024px; /* Tablet landscape / Small desktop */
+    --breakpoint-xl: 1280px; /* Desktop */
+    --breakpoint-2xl: 1536px; /* Large desktop */
+    --breakpoint-full: 1920px; /* Maximum width (ultra-wide displays) */
+
+    /* Content reading widths (optimal for text) */
+    --content-narrow: 640px; /* 45-60 chars (optimal for long-form) */
+    --content-comfortable: 768px; /* 60-75 chars (balanced) */
+    --content-wide: 1024px; /* 75-90 chars (dashboards, tables) */
+
+    /* Dashboard layout widths */
+    --dashboard-sidebar: 280px; /* Sidebar width (collapsed: 64px) */
+    --dashboard-content-min: 320px; /* Minimum content area (mobile) */
+    --dashboard-content-comfortable: 1200px; /* Comfortable dashboard width */
+
+    /* Modal widths */
+    --modal-xs: 320px; /* Tiny modals (alerts, confirmations) */
+    --modal-sm: 448px; /* Small modals (quick forms) */
+    --modal-md: 640px; /* Default modal (standard forms) */
+    --modal-lg: 896px; /* Large modals (detailed forms) */
+    --modal-xl: 1152px; /* Extra large modals (complex wizards) */
+    --modal-full: 90vw; /* Full-width modal (image galleries) */
+
+    /* Form widths (optimal input experience) */
+    --form-input-sm: 160px; /* Small inputs (zip code, age) */
+    --form-input-md: 320px; /* Default input (name, email) */
+    --form-input-lg: 480px; /* Large input (address, long text) */
+    --form-input-full: 100%; /* Full-width input */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📏 COMPONENT HEIGHTS
+       Based on WCAG touch targets & visual rhythm
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /**
+     * Touch Target Guidelines:
+     * - WCAG 2.1 AA: 44x44px minimum (mobile)
+     * - WCAG 2.1 AAA: 48x48px recommended
+     * - Apple HIG: 44pt minimum (44px @1x)
+     * - Material Design: 48dp minimum
+     * - Android: 48dp minimum
+     *
+     * Desktop Guidelines:
+     * - Smaller targets acceptable (32-40px)
+     * - Hover states for better affordance
+     */
+
+    /* Button heights (WCAG AAA compliant) */
+    --height-button-xs: 28px; /* Tiny buttons (desktop only, tags, chips) */
+    --height-button-sm: 32px; /* Small buttons (desktop, compact UIs) */
+    --height-button-md: 40px; /* Default button (desktop) */
+    --height-button-lg: 44px; /* Large button (mobile-friendly, WCAG AA) */
+    --height-button-xl: 48px; /* Extra large (mobile primary actions, WCAG AAA) */
+
+    /* Input heights (form fields) */
+    --height-input-xs: 28px; /* Tiny input (desktop only, inline edits) */
+    --height-input-sm: 32px; /* Small input (desktop, compact forms) */
+    --height-input-md: 40px; /* Default input (desktop) */
+    --height-input-lg: 44px; /* Large input (mobile-friendly, WCAG AA) */
+    --height-input-xl: 48px; /* Extra large (mobile primary inputs, WCAG AAA) */
+
+    /* Select/Dropdown heights */
+    --height-select-sm: 32px; /* Small select (desktop, compact) */
+    --height-select-md: 40px; /* Default select (desktop) */
+    --height-select-lg: 44px; /* Large select (mobile-friendly) */
+
+    /* Checkbox/Radio sizes (touch targets) */
+    --size-checkbox-sm: 16px; /* Small checkbox (desktop) */
+    --size-checkbox-md: 20px; /* Default checkbox (balanced) */
+    --size-checkbox-lg: 24px; /* Large checkbox (mobile-friendly) */
+
+    /* Switch sizes (toggle) */
+    --size-switch-sm: 32px; /* Small switch width (desktop) */
+    --size-switch-md: 40px; /* Default switch (balanced) */
+    --size-switch-lg: 48px; /* Large switch (mobile-friendly) */
+
+    /* Avatar sizes */
+    --size-avatar-xs: 24px; /* Tiny avatar (lists, mentions) */
+    --size-avatar-sm: 32px; /* Small avatar (compact lists) */
+    --size-avatar-md: 40px; /* Default avatar (lists, cards) */
+    --size-avatar-lg: 56px; /* Large avatar (profiles, headers) */
+    --size-avatar-xl: 80px; /* Extra large (profile pages) */
+    --size-avatar-2xl: 120px; /* Huge avatar (profile hero) */
+
+    /* Badge/Chip heights */
+    --height-badge-sm: 20px; /* Small badge (compact) */
+    --height-badge-md: 24px; /* Default badge */
+    --height-badge-lg: 28px; /* Large badge */
+
+    /* Header heights */
+    --height-navbar: 64px; /* Top navigation bar (desktop) */
+    --height-navbar-mobile: 56px; /* Mobile navbar (compact) */
+    --height-topbar: 48px; /* Secondary header (breadcrumbs, tabs) */
+    --height-footer: 64px; /* Page footer */
+
+    /* Sidebar widths (navigation) */
+    --width-sidebar-collapsed: 64px; /* Collapsed sidebar (icons only) */
+    --width-sidebar-expanded: 280px; /* Expanded sidebar (full navigation) */
+    --width-sidebar-wide: 320px; /* Wide sidebar (secondary navigation) */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎯 ICON SIZES
+       Powers of 2 for crisp rendering at all scales
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /**
+     * Icon Sizing Research:
+     * - Powers of 2: 8, 12, 16, 20, 24, 32, 40, 48 (pixel-perfect)
+     * - Material Design: 18dp, 24dp, 36dp, 48dp
+     * - Lucide Icons: Default 24px, scales well 16-48px
+     * - Touch targets: 44x44px minimum (icon + padding)
+     *
+     * Visual Balance:
+     * - Small text (12-14px): 16px icon
+     * - Body text (16px): 20-24px icon
+     * - Headings (18-24px): 24-32px icon
+     * - Hero (40px+): 48px+ icon
+     */
+
+    /* Standard icon sizes (Lucide default scale) */
+    --size-icon-xs: 12px; /* Tiny icon (inline with small text, indicators) */
+    --size-icon-sm: 16px; /* Small icon (inline with body text, buttons) */
+    --size-icon-md: 20px; /* Default icon (NIS2 standard for most UI) */
+    --size-icon-lg: 24px; /* Large icon (Lucide default, section headers) */
+    --size-icon-xl: 32px; /* Extra large (cards, features) */
+    --size-icon-2xl: 40px; /* Huge (hero sections, empty states) */
+    --size-icon-3xl: 48px; /* Massive (marketing pages, splash screens) */
+
+    /* Contextual icon sizes */
+    --size-icon-button: 20px; /* Icon inside button (balanced) */
+    --size-icon-input: 16px; /* Icon inside input field (compact) */
+    --size-icon-nav: 20px; /* Navigation icon (sidebar, menus) */
+    --size-icon-card: 24px; /* Card header icon */
+    --size-icon-empty-state: 48px; /* Empty state illustration */
+
+    /* Icon touch targets (including padding) */
+    --size-icon-touch-sm: 32px; /* Small clickable icon area (desktop) */
+    --size-icon-touch-md: 40px; /* Default clickable icon area */
+    --size-icon-touch-lg: 44px; /* Large clickable icon (WCAG AA) */
+    --size-icon-touch-xl: 48px; /* Extra large (WCAG AAA) */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📊 DASHBOARD COMPONENT SIZES
+       Specific to CRM dashboard layouts
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Stat cards (KPI displays) */
+    --height-stat-card: 120px; /* Compact stat card */
+    --height-stat-card-lg: 160px; /* Large stat card with graph */
+
+    /* Table row heights */
+    --height-table-row-sm: 32px; /* Compact table (desktop, data-dense) */
+    --height-table-row-md: 48px; /* Default table (balanced) */
+    --height-table-row-lg: 56px; /* Large table (mobile-friendly) */
+
+    /* List item heights */
+    --height-list-item-sm: 40px; /* Compact list */
+    --height-list-item-md: 48px; /* Default list */
+    --height-list-item-lg: 64px; /* Large list (with secondary text) */
+    --height-list-item-xl: 80px; /* Extra large (with avatar + metadata) */
+
+    /* Card heights (dashboard widgets) */
+    --height-card-sm: 200px; /* Small card (quick stats) */
+    --height-card-md: 320px; /* Default card (charts, lists) */
+    --height-card-lg: 480px; /* Large card (detailed content) */
+    --height-card-full: 100vh; /* Full-height card (mobile views) */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📱 RESPONSIVE SIZING
+       Fluid sizing for adaptive layouts
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /**
+     * Responsive Strategy:
+     * - Mobile: Larger touch targets (44-48px)
+     * - Desktop: Smaller, denser UI (32-40px)
+     * - Use clamp() for smooth scaling
+     */
+
+    /* Responsive button height (mobile-first) */
+    --height-button-responsive: clamp(40px, 5vw, 48px);
+
+    /* Responsive input height */
+    --height-input-responsive: clamp(40px, 5vw, 48px);
+
+    /* Responsive icon size */
+    --size-icon-responsive: clamp(20px, 2.5vw, 24px);
+
+    /* Responsive container width */
+    --container-responsive: clamp(320px, 90vw, 1280px);
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎯 SEMANTIC SIZING TOKENS
+       Context-aware sizing for better DX
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Touch target sizes (WCAG compliant) */
+    --size-touch-sm: 32px; /* Small touch target (desktop only) */
+    --size-touch-md: 40px; /* Medium touch target (desktop primary) */
+    --size-touch-lg: 44px; /* Large touch target (WCAG AA, mobile) */
+    --size-touch-xl: 48px; /* Extra large (WCAG AAA, primary mobile) */
+
+    /* Content area constraints (reading comfort) */
+    --size-prose-narrow: 65ch; /* Optimal for long-form reading */
+    --size-prose-comfortable: 75ch; /* Balanced for articles */
+    --size-prose-wide: 90ch; /* Wide for technical docs */
+
+    /* Image placeholder sizes */
+    --size-thumbnail-xs: 48px; /* Tiny thumbnail (lists) */
+    --size-thumbnail-sm: 64px; /* Small thumbnail (compact cards) */
+    --size-thumbnail-md: 120px; /* Default thumbnail */
+    --size-thumbnail-lg: 240px; /* Large thumbnail (product cards) */
+    --size-thumbnail-xl: 480px; /* Extra large (hero images) */
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 SIZING UTILITY CLASSES
+   Direct access to sizing values
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer utilities {
+  /* ━━━ CONTAINER WIDTH UTILITIES ━━━ */
+
+  .breakpoint-sm {
+    max-width: var(--breakpoint-sm);
+  }
+
+  .breakpoint-md {
+    max-width: var(--breakpoint-md);
+  }
+
+  .breakpoint-lg {
+    max-width: var(--breakpoint-lg);
+  }
+
+  .breakpoint-xl {
+    max-width: var(--breakpoint-xl);
+  }
+
+  .breakpoint-2xl {
+    max-width: var(--breakpoint-2xl);
+  }
+
+  .breakpoint-full {
+    max-width: var(--breakpoint-full);
+  }
+
+  /* Content reading widths */
+  .content-narrow {
+    max-width: var(--content-narrow);
+  }
+
+  .content-comfortable {
+    max-width: var(--content-comfortable);
+  }
+
+  .content-wide {
+    max-width: var(--content-wide);
+  }
+
+  /* Prose constraints (optimal reading) */
+  .prose-narrow {
+    max-width: var(--size-prose-narrow);
+  }
+
+  .prose-comfortable {
+    max-width: var(--size-prose-comfortable);
+  }
+
+  .prose-wide {
+    max-width: var(--size-prose-wide);
+  }
+
+  /* ━━━ COMPONENT HEIGHT UTILITIES ━━━ */
+
+  /* Button heights */
+  .h-button-xs {
+    height: var(--height-button-xs);
+  }
+
+  .h-button-sm {
+    height: var(--height-button-sm);
+  }
+
+  .h-button-md {
+    height: var(--height-button-md);
+  }
+
+  .h-button-lg {
+    height: var(--height-button-lg);
+  }
+
+  .h-button-xl {
+    height: var(--height-button-xl);
+  }
+
+  /* Input heights */
+  .h-input-xs {
+    height: var(--height-input-xs);
+  }
+
+  .h-input-sm {
+    height: var(--height-input-sm);
+  }
+
+  .h-input-md {
+    height: var(--height-input-md);
+  }
+
+  .h-input-lg {
+    height: var(--height-input-lg);
+  }
+
+  .h-input-xl {
+    height: var(--height-input-xl);
+  }
+
+  /* ━━━ ICON SIZE UTILITIES ━━━ */
+
+  .icon-xs {
+    width: var(--size-icon-xs);
+    height: var(--size-icon-xs);
+  }
+
+  .icon-sm {
+    width: var(--size-icon-sm);
+    height: var(--size-icon-sm);
+  }
+
+  .icon-md {
+    width: var(--size-icon-md);
+    height: var(--size-icon-md);
+  }
+
+  .icon-lg {
+    width: var(--size-icon-lg);
+    height: var(--size-icon-lg);
+  }
+
+  .icon-xl {
+    width: var(--size-icon-xl);
+    height: var(--size-icon-xl);
+  }
+
+  .icon-2xl {
+    width: var(--size-icon-2xl);
+    height: var(--size-icon-2xl);
+  }
+
+  .icon-3xl {
+    width: var(--size-icon-3xl);
+    height: var(--size-icon-3xl);
+  }
+
+  /* Contextual icon sizes */
+  .icon-button {
+    width: var(--size-icon-button);
+    height: var(--size-icon-button);
+  }
+
+  .icon-input {
+    width: var(--size-icon-input);
+    height: var(--size-icon-input);
+  }
+
+  .icon-nav {
+    width: var(--size-icon-nav);
+    height: var(--size-icon-nav);
+  }
+
+  /* ━━━ AVATAR SIZE UTILITIES ━━━ */
+
+  .avatar-xs {
+    width: var(--size-avatar-xs);
+    height: var(--size-avatar-xs);
+  }
+
+  .avatar-sm {
+    width: var(--size-avatar-sm);
+    height: var(--size-avatar-sm);
+  }
+
+  .avatar-md {
+    width: var(--size-avatar-md);
+    height: var(--size-avatar-md);
+  }
+
+  .avatar-lg {
+    width: var(--size-avatar-lg);
+    height: var(--size-avatar-lg);
+  }
+
+  .avatar-xl {
+    width: var(--size-avatar-xl);
+    height: var(--size-avatar-xl);
+  }
+
+  .avatar-2xl {
+    width: var(--size-avatar-2xl);
+    height: var(--size-avatar-2xl);
+  }
+
+  /* ━━━ TOUCH TARGET UTILITIES ━━━ */
+
+  .touch-sm {
+    min-width: var(--size-touch-sm);
+    min-height: var(--size-touch-sm);
+  }
+
+  .touch-md {
+    min-width: var(--size-touch-md);
+    min-height: var(--size-touch-md);
+  }
+
+  .touch-lg {
+    min-width: var(--size-touch-lg);
+    min-height: var(--size-touch-lg);
+  }
+
+  .touch-xl {
+    min-width: var(--size-touch-xl);
+    min-height: var(--size-touch-xl);
+  }
+
+  /* ━━━ ASPECT RATIO HELPERS ━━━ */
+
+  .aspect-square {
+    aspect-ratio: 1 / 1;
+  }
+
+  .aspect-video {
+    aspect-ratio: 16 / 9;
+  }
+
+  .aspect-portrait {
+    aspect-ratio: 3 / 4;
+  }
+
+  .aspect-landscape {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📚 USAGE EXAMPLES & GUIDELINES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   1. BREAKPOINT WIDTHS
+      - Use .breakpoint-* for page-level constraints
+      - Use .content-* for reading comfort
+      - Use .prose-* for text-heavy content
+      - Example: <div className="breakpoint-xl mx-auto">content</div>
+
+   2. COMPONENT HEIGHTS
+      - Mobile: Use -lg or -xl variants (44-48px, WCAG compliant)
+      - Desktop: Use -md variant (40px, comfortable)
+      - Compact UIs: Use -sm variant (32px, data-dense)
+      - Example: <Button className="h-button-lg">Mobile Button</Button>
+
+   3. ICON SIZES
+      - Default: 20px (var(--size-icon-md)) - balanced
+      - Lucide standard: 24px (var(--size-icon-lg))
+      - Button icons: 20px (var(--size-icon-button))
+      - Empty states: 48px (var(--size-icon-3xl))
+      - Example: <Icon className="icon-md" />
+
+   4. TOUCH TARGETS (WCAG Compliance)
+      - Always ensure clickable elements are 44x44px minimum
+      - Use padding to increase touch area if needed
+      - Example: <IconButton className="touch-lg">
+                   <Icon className="icon-md" />
+                 </IconButton>
+
+   5. AVATARS
+      - Lists: -sm (32px) or -md (40px)
+      - Cards: -md (40px) or -lg (56px)
+      - Profile pages: -xl (80px) or -2xl (120px)
+      - Example: <Avatar className="avatar-md" />
+
+   6. RESPONSIVE SIZING
+      - Use clamp() variables for fluid scaling
+      - Mobile-first: Start with larger sizes, scale down
+      - Example: height: var(--height-button-responsive);
+
+   7. READING COMFORT
+      - Long-form text: 65ch (var(--size-prose-narrow))
+      - Articles: 75ch (var(--size-prose-comfortable))
+      - Technical docs: 90ch (var(--size-prose-wide))
+      - Example: <article className="prose-comfortable">
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

@@ -1,0 +1,384 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 📏 NIS2 SPACING SYSTEM
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Based on UX research and industry standards:
+ * - 8px base grid (Material Design, Carbon, Apple HIG)
+ * - 4px for micro-adjustments and tight spacing
+ * - Semantic naming for better DX
+ * - Progressive scale for visual hierarchy
+ *
+ * Research Sources:
+ * - Material Design 3: 4dp/8dp base unit
+ * - Carbon Design System: 8px grid
+ * - Red Hat Design System: 8pt grid
+ * - Apple Human Interface Guidelines: 8pt grid
+ *
+ * Philosophy:
+ * - Consistency creates visual harmony
+ * - Predictable patterns improve UX
+ * - Semantic names improve developer experience
+ * - Accessibility-ready spacing
+ */
+
+@layer base {
+  :root {
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎯 SPACING SCALE (8px Grid System)
+       Base: 8px (0.5rem)
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Micro spacing (4px increments for fine control) */
+    --spacing-0: 0px; /* 0 - No spacing */
+    --spacing-px: 1px; /* 1px - Borders, dividers */
+    --spacing-0-5: 0.125rem; /* 2px - Hairline spacing */
+    --spacing-1: 0.25rem; /* 4px - Tight spacing, small gaps */
+    --spacing-1-5: 0.375rem; /* 6px - Between 4-8 (rare use) */
+    --spacing-2: 0.5rem; /* 8px - Smallest standard spacing */
+
+    /* Base spacing (8px multiples - primary scale) */
+    --spacing-3: 0.75rem; /* 12px - Compact spacing */
+    --spacing-4: 1rem; /* 16px - Default spacing (MOST USED) */
+    --spacing-5: 1.25rem; /* 20px - Slightly relaxed */
+    --spacing-6: 1.5rem; /* 24px - Comfortable spacing */
+    --spacing-7: 1.75rem; /* 28px - Between 24-32 */
+    --spacing-8: 2rem; /* 32px - Section spacing */
+
+    /* Extended spacing (for larger gaps) */
+    --spacing-10: 2.5rem; /* 40px - Large section gaps */
+    --spacing-12: 3rem; /* 48px - Major sections */
+    --spacing-14: 3.5rem; /* 56px - Extra large gaps */
+    --spacing-16: 4rem; /* 64px - Page-level spacing */
+    --spacing-20: 5rem; /* 80px - Hero sections */
+    --spacing-24: 6rem; /* 96px - Major page sections */
+    --spacing-32: 8rem; /* 128px - Extra large sections */
+    --spacing-40: 10rem; /* 160px - Massive spacing */
+    --spacing-48: 12rem; /* 192px - Hero padding */
+    --spacing-56: 14rem; /* 224px - Extreme spacing */
+    --spacing-64: 16rem; /* 256px - Maximum spacing */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎨 SEMANTIC SPACING TOKENS
+       Context-aware names for better DX
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Component Internal Spacing */
+    --spacing-component-xs: var(--spacing-1); /* 4px - Tight button padding */
+    --spacing-component-sm: var(--spacing-2); /* 8px - Small padding */
+    --spacing-component-md: var(--spacing-4); /* 16px - Default padding */
+    --spacing-component-lg: var(--spacing-6); /* 24px - Large padding */
+    --spacing-component-xl: var(--spacing-8); /* 32px - Extra large padding */
+
+    /* Layout Spacing (between sections) */
+    --spacing-layout-xs: var(--spacing-4); /* 16px - Tight layout */
+    --spacing-layout-sm: var(--spacing-6); /* 24px - Compact layout */
+    --spacing-layout-md: var(--spacing-8); /* 32px - Default layout */
+    --spacing-layout-lg: var(--spacing-12); /* 48px - Spacious layout */
+    --spacing-layout-xl: var(--spacing-16); /* 64px - Extra spacious */
+    --spacing-layout-2xl: var(--spacing-24); /* 96px - Major sections */
+
+    /* Content Spacing (text, lists, elements) */
+    --spacing-content-xs: var(--spacing-2); /* 8px - Tight content */
+    --spacing-content-sm: var(--spacing-3); /* 12px - Compact content */
+    --spacing-content-md: var(--spacing-4); /* 16px - Default content */
+    --spacing-content-lg: var(--spacing-6); /* 24px - Relaxed content */
+    --spacing-content-xl: var(--spacing-8); /* 32px - Spacious content */
+
+    /* Container Padding (cards, modals, panels) */
+    --spacing-container-xs: var(--spacing-3); /* 12px - Compact container */
+    --spacing-container-sm: var(--spacing-4); /* 16px - Small container */
+    --spacing-container-md: var(--spacing-6); /* 24px - Default container */
+    --spacing-container-lg: var(--spacing-8); /* 32px - Large container */
+    --spacing-container-xl: var(--spacing-12); /* 48px - Extra large container */
+
+    /* Stack Spacing (vertical gaps between elements) */
+    --spacing-stack-xs: var(--spacing-1); /* 4px - Tight stack */
+    --spacing-stack-sm: var(--spacing-2); /* 8px - Compact stack */
+    --spacing-stack-md: var(--spacing-4); /* 16px - Default stack */
+    --spacing-stack-lg: var(--spacing-6); /* 24px - Relaxed stack */
+    --spacing-stack-xl: var(--spacing-8); /* 32px - Spacious stack */
+
+    /* Inline Spacing (horizontal gaps between elements) */
+    --spacing-inline-xs: var(--spacing-1); /* 4px - Tight inline */
+    --spacing-inline-sm: var(--spacing-2); /* 8px - Compact inline */
+    --spacing-inline-md: var(--spacing-3); /* 12px - Default inline */
+    --spacing-inline-lg: var(--spacing-4); /* 16px - Relaxed inline */
+    --spacing-inline-xl: var(--spacing-6); /* 24px - Spacious inline */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎯 SPECIFIC USE CASES
+       Pre-defined spacing for common patterns
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Page Spacing */
+    --spacing-page-padding: var(--spacing-6); /* 24px - Page edges */
+    --spacing-page-section: var(--spacing-8); /* 32px - Between page sections */
+    --spacing-page-header: var(--spacing-6); /* 24px - Header bottom spacing */
+
+    /* Card Spacing */
+    --spacing-card-padding: var(--spacing-6); /* 24px - Card internal padding */
+    --spacing-card-gap: var(--spacing-4); /* 16px - Between cards */
+    --spacing-card-header: var(--spacing-4); /* 16px - Card header padding */
+    --spacing-card-footer: var(--spacing-4); /* 16px - Card footer padding */
+
+    /* Form Spacing */
+    --spacing-form-field: var(--spacing-4); /* 16px - Between form fields */
+    --spacing-form-section: var(--spacing-8); /* 32px - Between form sections */
+    --spacing-form-label: var(--spacing-2); /* 8px - Label to input */
+    --spacing-form-help: var(--spacing-1); /* 4px - Input to helper text */
+
+    /* Button Spacing */
+    --spacing-button-padding-x: var(--spacing-4); /* 16px - Horizontal padding */
+    --spacing-button-padding-y: var(--spacing-2); /* 8px - Vertical padding */
+    --spacing-button-gap: var(--spacing-2); /* 8px - Icon to text gap */
+
+    /* List Spacing */
+    --spacing-list-item: var(--spacing-3); /* 12px - Between list items */
+    --spacing-list-section: var(--spacing-6); /* 24px - Between list sections */
+
+    /* Grid Spacing */
+    --spacing-grid-gap: var(--spacing-4); /* 16px - Default grid gap */
+    --spacing-grid-gap-sm: var(--spacing-2); /* 8px - Compact grid */
+    --spacing-grid-gap-lg: var(--spacing-6); /* 24px - Spacious grid */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📱 RESPONSIVE SPACING
+       Smaller spacing on mobile, larger on desktop
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    --spacing-responsive-sm: clamp(var(--spacing-2), 2vw, var(--spacing-4));
+    --spacing-responsive-md: clamp(var(--spacing-4), 3vw, var(--spacing-8));
+    --spacing-responsive-lg: clamp(var(--spacing-6), 4vw, var(--spacing-12));
+    --spacing-responsive-xl: clamp(var(--spacing-8), 5vw, var(--spacing-16));
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 SPACING UTILITY CLASSES
+   Direct access to spacing values
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer utilities {
+  /* ━━━ PADDING UTILITIES ━━━ */
+
+  /* All sides */
+  .p-component-xs {
+    padding: var(--spacing-component-xs);
+  }
+  .p-component-sm {
+    padding: var(--spacing-component-sm);
+  }
+  .p-component-md {
+    padding: var(--spacing-component-md);
+  }
+  .p-component-lg {
+    padding: var(--spacing-component-lg);
+  }
+  .p-component-xl {
+    padding: var(--spacing-component-xl);
+  }
+
+  /* Container padding */
+  .p-container-xs {
+    padding: var(--spacing-container-xs);
+  }
+  .p-container-sm {
+    padding: var(--spacing-container-sm);
+  }
+  .p-container-md {
+    padding: var(--spacing-container-md);
+  }
+  .p-container-lg {
+    padding: var(--spacing-container-lg);
+  }
+  .p-container-xl {
+    padding: var(--spacing-container-xl);
+  }
+
+  /* ━━━ GAP UTILITIES ━━━ */
+
+  /* Stack gaps (vertical) */
+  .gap-stack-xs {
+    gap: var(--spacing-stack-xs);
+  }
+  .gap-stack-sm {
+    gap: var(--spacing-stack-sm);
+  }
+  .gap-stack-md {
+    gap: var(--spacing-stack-md);
+  }
+  .gap-stack-lg {
+    gap: var(--spacing-stack-lg);
+  }
+  .gap-stack-xl {
+    gap: var(--spacing-stack-xl);
+  }
+
+  /* Inline gaps (horizontal) */
+  .gap-inline-xs {
+    gap: var(--spacing-inline-xs);
+  }
+  .gap-inline-sm {
+    gap: var(--spacing-inline-sm);
+  }
+  .gap-inline-md {
+    gap: var(--spacing-inline-md);
+  }
+  .gap-inline-lg {
+    gap: var(--spacing-inline-lg);
+  }
+  .gap-inline-xl {
+    gap: var(--spacing-inline-xl);
+  }
+
+  /* Content gaps */
+  .gap-content-xs {
+    gap: var(--spacing-content-xs);
+  }
+  .gap-content-sm {
+    gap: var(--spacing-content-sm);
+  }
+  .gap-content-md {
+    gap: var(--spacing-content-md);
+  }
+  .gap-content-lg {
+    gap: var(--spacing-content-lg);
+  }
+  .gap-content-xl {
+    gap: var(--spacing-content-xl);
+  }
+
+  /* ━━━ LAYOUT SPACING ━━━ */
+
+  /* Layout gaps (between major sections) */
+  .gap-layout-xs {
+    gap: var(--spacing-layout-xs);
+  }
+  .gap-layout-sm {
+    gap: var(--spacing-layout-sm);
+  }
+  .gap-layout-md {
+    gap: var(--spacing-layout-md);
+  }
+  .gap-layout-lg {
+    gap: var(--spacing-layout-lg);
+  }
+  .gap-layout-xl {
+    gap: var(--spacing-layout-xl);
+  }
+  .gap-layout-2xl {
+    gap: var(--spacing-layout-2xl);
+  }
+
+  /* ━━━ MARGIN UTILITIES ━━━ */
+
+  /* Margin stack (vertical margins - both top & bottom) */
+  .my-stack-xs {
+    margin-top: var(--spacing-stack-xs);
+    margin-bottom: var(--spacing-stack-xs);
+  }
+  .my-stack-sm {
+    margin-top: var(--spacing-stack-sm);
+    margin-bottom: var(--spacing-stack-sm);
+  }
+  .my-stack-md {
+    margin-top: var(--spacing-stack-md);
+    margin-bottom: var(--spacing-stack-md);
+  }
+  .my-stack-lg {
+    margin-top: var(--spacing-stack-lg);
+    margin-bottom: var(--spacing-stack-lg);
+  }
+  .my-stack-xl {
+    margin-top: var(--spacing-stack-xl);
+    margin-bottom: var(--spacing-stack-xl);
+  }
+
+  /* Margin bottom stack (vertical margin - bottom only) */
+  .mb-stack-xs {
+    margin-bottom: var(--spacing-stack-xs);
+  }
+  .mb-stack-sm {
+    margin-bottom: var(--spacing-stack-sm);
+  }
+  .mb-stack-md {
+    margin-bottom: var(--spacing-stack-md);
+  }
+  .mb-stack-lg {
+    margin-bottom: var(--spacing-stack-lg);
+  }
+  .mb-stack-xl {
+    margin-bottom: var(--spacing-stack-xl);
+  }
+
+  /* Margin top stack (vertical margin - top only) */
+  .mt-stack-xs {
+    margin-top: var(--spacing-stack-xs);
+  }
+  .mt-stack-sm {
+    margin-top: var(--spacing-stack-sm);
+  }
+  .mt-stack-md {
+    margin-top: var(--spacing-stack-md);
+  }
+  .mt-stack-lg {
+    margin-top: var(--spacing-stack-lg);
+  }
+  .mt-stack-xl {
+    margin-top: var(--spacing-stack-xl);
+  }
+
+  /* ━━━ SPECIFIC USE CASE CLASSES ━━━ */
+
+  .page-spacing {
+    padding: var(--spacing-page-padding);
+  }
+
+  .card-spacing {
+    padding: var(--spacing-card-padding);
+  }
+
+  .form-field-spacing {
+    margin-bottom: var(--spacing-form-field);
+  }
+
+  .section-spacing {
+    margin-top: var(--spacing-page-section);
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📚 USAGE EXAMPLES & GUIDELINES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   1. COMPONENT INTERNAL SPACING
+      - Use: --spacing-component-* or Tailwind's p-* classes
+      - Example: <Button className="px-4 py-2">Click</Button>
+
+   2. LAYOUT SPACING (between sections)
+      - Use: --spacing-layout-* or gap-layout-*
+      - Example: <div className="gap-layout-md">sections</div>
+
+   3. CONTENT SPACING (text, lists)
+      - Use: --spacing-content-* or gap-content-*
+      - Example: <div className="gap-content-md">paragraphs</div>
+
+   4. CARD/CONTAINER PADDING
+      - Use: --spacing-container-* or p-container-*
+      - Example: <div className="p-container-md">content</div>
+
+   5. STACK SPACING (vertical elements)
+      - Use: --spacing-stack-* or gap-stack-*
+      - Example: <div className="flex flex-col gap-stack-md">items</div>
+
+   6. INLINE SPACING (horizontal elements)
+      - Use: --spacing-inline-* or gap-inline-*
+      - Example: <div className="flex gap-inline-md">buttons</div>
+
+   7. WHEN TO USE TAILWIND vs SEMANTIC TOKENS
+      - Quick prototyping: Use Tailwind (p-4, gap-6)
+      - Production components: Use semantic tokens (var(--spacing-card-padding))
+      - Design system components: Always use semantic tokens
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

@@ -1,0 +1,123 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 SIDEBAR COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * UX Research Based Design:
+ * - Width: 256px expanded (240-300px recommended), 48px collapsed
+ * - Touch targets: 40px height (Figma best practice)
+ * - Icon size: 20px for better recognition
+ * - Spacing: 8px base grid with semantic tokens
+ * - Typography: Semibold primary, regular secondary
+ *
+ * Sources:
+ * - Material Design Navigation Guidelines
+ * - Apple Human Interface Guidelines (44pt touch targets)
+ * - UX Planet: Best Practices for Sidebar Design
+ * - Carbon Design System: Navigation patterns
+ * - Figma UI example analysis
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SIDEBAR CONTENT SPACING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Content area: Large gap between groups (24px)
+ * Matches Figma example for clear section separation
+ */
+[data-sidebar='content'] {
+  gap: 1.5rem; /* 24px - very clear group separation */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GROUP LABELS - SUBTLE & SMALL
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Group labels: Very subtle, small all-caps
+ * Figma best practice: 10px, 50% opacity, wide tracking
+ */
+[data-sidebar='group-label'] {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.5;
+  font-weight: 600;
+  margin-bottom: 0.5rem; /* 8px */
+  height: 1.5rem; /* 24px */
+  transition:
+    opacity 200ms,
+    margin-top 200ms;
+}
+
+/* Hide labels when sidebar is collapsed */
+[data-state='collapsed'] [data-sidebar='group-label'],
+.group-data-\[collapsible\=icon\] [data-sidebar='group-label'] {
+  opacity: 0;
+  margin-top: -2rem; /* Pull up to save space */
+  pointer-events: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MENU ITEM SPACING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Menu container: 8px gap between items
+ * Matches Figma example for comfortable spacing
+ */
+[data-sidebar='menu'] {
+  gap: 0.5rem; /* 8px - breathing room between items */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   MENU BUTTON SIZING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Menu buttons: 40px height (Figma standard)
+ * 14px horizontal padding for comfortable spacing
+ */
+[data-sidebar='menu-button'] {
+  height: 2.5rem; /* 40px */
+  padding-left: 0.875rem; /* 14px */
+  padding-right: 0.875rem; /* 14px */
+  gap: 0.75rem; /* 12px between icon and text */
+}
+
+/**
+ * Icon size: 20px (Carbon Design System recommendation)
+ */
+[data-sidebar='menu-button'] > svg {
+  width: 1.25rem; /* 20px */
+  height: 1.25rem; /* 20px */
+  flex-shrink: 0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ACTIVE STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Active state: Font weight change for emphasis
+ * Matches Figma subtle approach
+ */
+[data-sidebar='menu-button'][data-active='true'] {
+  font-weight: 600; /* Semibold for active items */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TOOLTIPS (COLLAPSED STATE)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Tooltip font size optimization
+ * Material Design & Apple HIG: 13-14px for tooltips
+ * Shadcn default is 12px (text-xs) - too small for readability
+ */
+[data-slot='tooltip-content'] {
+  font-size: 13px; /* Better readability than 12px */
+  padding: 0.375rem 0.75rem; /* 6px 12px - slightly more comfortable */
+}

@@ -1,0 +1,359 @@
+/* ===========================================
+   Data Table Component Styles
+   NIS2 Design System - TanStack Table Integration
+
+   Uses semantic spacing tokens from:
+   - src/styles/foundations/spacing.css
+   - src/styles/foundations/radius.css
+   - src/styles/foundations/shadows.css
+   =========================================== */
+
+@layer components {
+  /* ─────────────────────────────────────────
+     Table Container
+     ───────────────────────────────────────── */
+  .data-table-container {
+    @apply w-full;
+  }
+
+  .data-table-wrapper {
+    @apply overflow-hidden border;
+    border-radius: var(--radius-card-md);
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ─────────────────────────────────────────
+     Table Header Styling
+     ───────────────────────────────────────── */
+  .data-table-header {
+    @apply bg-muted/30;
+  }
+
+  .data-table-header-cell {
+    @apply text-left align-middle font-medium text-muted-foreground;
+    height: 3rem; /* 48px - fixed header height */
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+
+  .data-table-header-cell-content {
+    @apply flex items-center;
+    gap: var(--spacing-inline-sm);
+  }
+
+  /* Sortable Header Button */
+  .data-table-sort-button {
+    @apply data-[state=open]:bg-accent;
+    margin-left: calc(-1 * var(--spacing-3));
+    height: var(--sizing-8);
+  }
+
+  .data-table-sort-icon {
+    @apply h-4 w-4;
+    margin-left: var(--spacing-2);
+  }
+
+  /* ─────────────────────────────────────────
+     Table Body Styling
+     ───────────────────────────────────────── */
+  .data-table-row {
+    @apply border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted;
+  }
+
+  .data-table-row-clickable {
+    @apply cursor-pointer;
+  }
+
+  .data-table-row-inactive {
+    @apply opacity-60;
+  }
+
+  .data-table-cell {
+    @apply align-middle;
+    padding: var(--spacing-3) var(--spacing-4);
+  }
+
+  /* ─────────────────────────────────────────
+     Empty State
+     ───────────────────────────────────────── */
+  .data-table-empty {
+    @apply text-center;
+    height: 6rem; /* 96px */
+  }
+
+  .data-table-empty-content {
+    @apply flex flex-col items-center justify-center;
+    padding-top: var(--spacing-layout-lg);
+    padding-bottom: var(--spacing-layout-lg);
+  }
+
+  .data-table-empty-icon {
+    @apply text-muted-foreground;
+    height: var(--sizing-12);
+    width: var(--sizing-12);
+    margin-bottom: var(--spacing-stack-md);
+  }
+
+  .data-table-empty-title {
+    @apply font-semibold;
+    font-size: 1.125rem; /* 18px */
+    margin-bottom: var(--spacing-stack-sm);
+  }
+
+  .data-table-empty-description {
+    @apply text-muted-foreground text-center;
+    font-size: 0.875rem; /* 14px */
+    margin-bottom: var(--spacing-stack-md);
+    max-width: 24rem;
+  }
+
+  /* ─────────────────────────────────────────
+     Toolbar
+     ───────────────────────────────────────── */
+  .data-table-toolbar {
+    @apply flex flex-col sm:flex-row sm:items-center sm:justify-between;
+    gap: var(--spacing-stack-md);
+    margin-bottom: var(--spacing-stack-md);
+  }
+
+  .data-table-toolbar-left {
+    @apply flex flex-1 flex-wrap items-center;
+    gap: var(--spacing-inline-sm);
+  }
+
+  .data-table-toolbar-right {
+    @apply flex items-center;
+    gap: var(--spacing-inline-sm);
+  }
+
+  /* ─────────────────────────────────────────
+     Pagination
+     ───────────────────────────────────────── */
+  .data-table-pagination {
+    @apply flex items-center justify-between;
+    padding: var(--spacing-stack-md) var(--spacing-2);
+  }
+
+  .data-table-pagination-info {
+    @apply flex-1 text-muted-foreground;
+    font-size: 0.875rem;
+  }
+
+  .data-table-pagination-controls {
+    @apply flex items-center;
+    gap: var(--spacing-inline-xl);
+  }
+
+  @media (min-width: 1024px) {
+    .data-table-pagination-controls {
+      gap: var(--spacing-8);
+    }
+  }
+
+  .data-table-pagination-rows {
+    @apply flex items-center;
+    gap: var(--spacing-inline-sm);
+  }
+
+  .data-table-pagination-rows-label {
+    @apply font-medium;
+    font-size: 0.875rem;
+  }
+
+  .data-table-pagination-pages {
+    @apply flex items-center justify-center font-medium;
+    font-size: 0.875rem;
+  }
+
+  .data-table-pagination-buttons {
+    @apply flex items-center;
+    gap: var(--spacing-inline-sm);
+  }
+
+  /* ─────────────────────────────────────────
+     Pagination Page Buttons
+     ───────────────────────────────────────── */
+  .pagination-button {
+    @apply flex items-center justify-center text-sm font-medium transition-colors;
+    height: var(--height-button-sm); /* 32px */
+    min-width: var(--height-button-sm); /* 32px */
+    padding-left: var(--spacing-component-sm);
+    padding-right: var(--spacing-component-sm);
+    border-radius: var(--radius-button-md); /* 8px */
+    color: var(--muted-foreground);
+  }
+
+  .pagination-button:hover:not(:disabled):not([aria-current='page']) {
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+
+  .pagination-button:disabled {
+    @apply cursor-not-allowed;
+    opacity: 0.3;
+  }
+
+  /* Active/Selected page */
+  .pagination-button[aria-current='page'] {
+    background-color: var(--muted);
+    color: var(--foreground);
+    border-radius: var(--radius-button-md); /* 8px */
+  }
+
+  /* Navigation arrows (prev/next) */
+  .pagination-nav {
+    @apply flex items-center justify-center transition-colors;
+    height: var(--height-button-sm); /* 32px */
+    width: var(--height-button-sm); /* 32px */
+    border-radius: var(--radius-button-md); /* 8px */
+    color: var(--muted-foreground);
+  }
+
+  .pagination-nav:hover:not(:disabled) {
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+
+  .pagination-nav:disabled {
+    @apply cursor-not-allowed;
+    opacity: 0.3;
+  }
+
+  .pagination-nav-icon {
+    height: var(--size-icon-input); /* 16px */
+    width: var(--size-icon-input); /* 16px */
+  }
+
+  /* Ellipsis */
+  .pagination-ellipsis {
+    @apply flex items-center justify-center text-sm select-none;
+    height: var(--height-button-sm); /* 32px */
+    width: var(--height-button-sm); /* 32px */
+    color: var(--muted-foreground);
+  }
+
+  /* ─────────────────────────────────────────
+     Faceted Filter
+     ───────────────────────────────────────── */
+  .data-table-faceted-trigger {
+    @apply border-dashed;
+    height: 2.25rem; /* 36px */
+  }
+
+  .data-table-faceted-badge {
+    @apply rounded-sm font-normal lg:hidden;
+    margin-left: var(--spacing-2);
+    padding-left: var(--spacing-1);
+    padding-right: var(--spacing-1);
+  }
+
+  .data-table-faceted-badge-desktop {
+    @apply hidden lg:flex;
+    gap: var(--spacing-inline-xs);
+  }
+
+  .data-table-faceted-separator {
+    height: var(--sizing-4);
+    margin-left: var(--spacing-2);
+    margin-right: var(--spacing-2);
+  }
+
+  .data-table-faceted-content {
+    width: 12.5rem; /* 200px */
+    padding: 0;
+  }
+
+  .data-table-faceted-input {
+    padding-left: var(--spacing-8);
+  }
+
+  .data-table-faceted-empty {
+    @apply text-center;
+    padding-top: var(--spacing-6);
+    padding-bottom: var(--spacing-6);
+    font-size: 0.875rem;
+  }
+
+  .data-table-faceted-group {
+    @apply overflow-auto;
+    max-height: 16rem; /* 256px */
+  }
+
+  .data-table-faceted-item {
+    @apply flex items-center;
+  }
+
+  .data-table-faceted-checkbox {
+    @apply flex items-center justify-center rounded-sm border border-primary;
+    margin-right: var(--spacing-2);
+    height: var(--sizing-4);
+    width: var(--sizing-4);
+  }
+
+  .data-table-faceted-checkbox-icon {
+    height: var(--sizing-4);
+    width: var(--sizing-4);
+  }
+
+  .data-table-faceted-icon {
+    @apply text-muted-foreground;
+    margin-right: var(--spacing-2);
+    height: var(--sizing-4);
+    width: var(--sizing-4);
+  }
+
+  .data-table-faceted-count {
+    @apply flex items-center justify-center font-mono;
+    margin-left: auto;
+    height: var(--sizing-4);
+    width: var(--sizing-4);
+    font-size: 0.75rem;
+  }
+
+  .data-table-faceted-clear {
+    @apply justify-center text-center;
+  }
+
+  /* ─────────────────────────────────────────
+     Bulk Selection Bar
+     ───────────────────────────────────────── */
+  .data-table-bulk-bar {
+    @apply flex items-center justify-between border bg-muted/50;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-3) var(--spacing-4);
+    margin-bottom: var(--spacing-stack-md);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .data-table-bulk-info {
+    @apply flex items-center;
+    gap: var(--spacing-inline-md);
+  }
+
+  .data-table-bulk-count {
+    @apply font-medium;
+    font-size: 0.875rem;
+  }
+
+  .data-table-bulk-clear {
+    height: var(--sizing-8);
+    padding-left: var(--spacing-2);
+    padding-right: var(--spacing-2);
+  }
+
+  .data-table-bulk-actions {
+    @apply flex items-center;
+    gap: var(--spacing-inline-sm);
+  }
+
+  /* ─────────────────────────────────────────
+     View Options
+     ───────────────────────────────────────── */
+  .data-table-view-options {
+    margin-left: auto;
+  }
+
+  .data-table-view-options-content {
+    width: 11.25rem; /* 180px */
+  }
+}

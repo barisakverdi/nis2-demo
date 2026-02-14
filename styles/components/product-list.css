@@ -1,0 +1,227 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * PRODUCT LIST PAGE LAYOUT
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Layout system for the product listing page with toggleable
+ * filter panel and responsive product grid.
+ *
+ * Structure:
+ * ┌─────────────────────────────────────────────┐
+ * │ .product-list-toolbar                       │
+ * │ [Search]              [Filter] [+ New]      │
+ * ├────────────┬────────────────────────────────┤
+ * │ .product-  │ .product-list-content          │
+ * │  list-     │  ┌──────┐ ┌──────┐ ┌──────┐   │
+ * │  filter-   │  │ Card │ │ Card │ │ Card │   │
+ * │  panel     │  └──────┘ └──────┘ └──────┘   │
+ * │ (toggle)   │                                │
+ * └────────────┴────────────────────────────────┘
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+@layer components {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TOOLBAR
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-list-toolbar {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-inline-md);
+    margin-bottom: var(--spacing-content-lg);
+  }
+
+  .product-list-toolbar-search {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 24rem;
+  }
+
+  .product-list-toolbar-actions {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    gap: var(--spacing-inline-sm);
+    margin-left: auto;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ACTIVE FILTER CHIPS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-list-toolbar-chips {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1-5);
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .product-filter-chip {
+    gap: var(--spacing-1);
+    padding-right: var(--spacing-1);
+    font-weight: 400;
+    cursor: default;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .product-filter-chip--overflow {
+    padding-right: var(--spacing-2);
+    cursor: default;
+  }
+
+  .product-filter-chip-remove {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--muted-foreground);
+    border-radius: 9999px;
+    transition: color 150ms ease;
+  }
+
+  .product-filter-chip-remove:hover {
+    color: var(--foreground);
+  }
+
+  .product-filter-chip-clear {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-left: var(--spacing-1);
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: var(--muted-foreground);
+    white-space: nowrap;
+    transition: color 150ms ease;
+  }
+
+  .product-filter-chip-clear:hover {
+    color: var(--foreground);
+  }
+
+  /* Small screens: allow toolbar to wrap */
+  @media (max-width: 767px) {
+    .product-list-toolbar {
+      flex-wrap: wrap;
+    }
+
+    .product-list-toolbar-search {
+      max-width: none;
+      width: 100%;
+      order: 1;
+    }
+
+    .product-list-toolbar-chips {
+      flex-basis: 100%;
+      flex-wrap: wrap;
+      overflow: visible;
+      order: 2;
+    }
+
+    .product-list-toolbar-actions {
+      order: 0;
+      margin-left: auto;
+    }
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     BODY (FILTER + CONTENT)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-list-body {
+    display: flex;
+    gap: var(--spacing-content-lg);
+    min-height: 0;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CONTENT AREA (GRID)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-list-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     GRID OVERRIDES (with filter open)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* When filter panel is open, reduce grid columns */
+  .product-list-body--filter-open .product-list-content .product-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    .product-list-body--filter-open .product-list-content .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .product-list-body--filter-open .product-list-content .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Without filter: allow 4 cols on wide screens */
+  .product-list-body:not(.product-list-body--filter-open) .product-list-content .product-grid {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    .product-list-body:not(.product-list-body--filter-open) .product-list-content .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-list-body:not(.product-list-body--filter-open) .product-list-content .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (min-width: 1440px) {
+    .product-list-body:not(.product-list-body--filter-open) .product-list-content .product-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FILTER TOGGLE BUTTON ACTIVE STATE
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-list-filter-toggle[data-active='true'] {
+    background-color: var(--accent);
+    border-color: var(--border);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     INFINITE SCROLL LOADER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-list-loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-8) 0;
+    color: var(--muted-foreground);
+    font-size: 0.875rem;
+  }
+
+  .product-list-end {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-6) 0;
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+  }
+}

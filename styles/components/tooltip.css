@@ -1,0 +1,18 @@
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   Tooltip Component Overrides
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer components {
+  /* Tooltip Content */
+  [data-slot='tooltip-content'] {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    max-width: 13rem; /* 208px - prevents overly wide tooltips */
+    text-wrap: wrap !important; /* Override text-balance from component */
+  }
+
+  /* Tooltip Arrow - matches content background */
+  [data-slot='tooltip-content'] > svg {
+    fill: var(--primary);
+  }
+}

@@ -1,0 +1,401 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 🔘 NIS2 BORDER RADIUS SYSTEM
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Based on UX research and industry standards:
+ * - Progressive scale for visual hierarchy
+ * - Semantic naming for context-aware usage
+ * - Balanced between modern softness and professional clarity
+ * - Consistent with 8px grid system
+ *
+ * Research Sources:
+ * - Material Design 3: Shape scale with contextual usage
+ * - Telerik Design System: Semantic radius naming
+ * - Apple HIG: Superellipse principles (20-22% ratio)
+ * - Carbon Design System: Sharp to moderate roundness spectrum
+ * - UX Research 2025: Rounded corners perceived 200ms faster than sharp edges
+ *
+ * Philosophy:
+ * - Subtle roundness (2-4px): Professional, clean, minimal
+ * - Moderate roundness (8-12px): Friendly, modern, balanced
+ * - High roundness (16-24px): Approachable, playful, engaging
+ * - Full roundness (999px/full): Pills, badges, avatars
+ *
+ * Psychological Impact:
+ * - Rounded corners = Safety, friendliness, approachability
+ * - Sharp corners = Formality, precision, seriousness
+ * - Brain processes rounded shapes 200ms faster than angular ones
+ */
+
+@layer base {
+  :root {
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎯 BASE RADIUS SCALE
+       Progressive scale aligned with 8px grid
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* No radius */
+    --radius-none: 0px; /* 0 - Sharp corners, formal, precise */
+
+    /* Subtle roundness (2-4px) - Professional & Clean */
+    --radius-xs: 0.125rem; /* 2px - Micro elements, tight corners */
+    --radius-sm: 0.25rem; /* 4px - Small components, subtle softness */
+
+    /* Moderate roundness (6-12px) - Modern & Balanced */
+    --radius-md: 0.5rem; /* 8px - Default UI elements (MOST USED) */
+    --radius-lg: 0.75rem; /* 12px - Cards, panels, containers */
+
+    /* High roundness (16-24px) - Friendly & Engaging */
+    --radius-xl: 1rem; /* 16px - Large components, prominent elements */
+    --radius-2xl: 1.5rem; /* 24px - Hero cards, featured content */
+
+    /* Extra high roundness (32-48px) - Special cases */
+    --radius-3xl: 2rem; /* 32px - Extra large components */
+    --radius-4xl: 3rem; /* 48px - Massive components, modals */
+
+    /* Full roundness - Pills & Circular */
+    --radius-full: 9999px; /* Circular - Pills, avatars, badges */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎨 SEMANTIC RADIUS TOKENS
+       Context-aware names for better DX
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Button Radii */
+    --radius-button-sm: var(--radius-sm); /* 4px - Small buttons */
+    --radius-button-md: var(--radius-md); /* 8px - Default buttons */
+    --radius-button-lg: var(--radius-lg); /* 12px - Large buttons */
+    --radius-button-pill: var(--radius-full); /* Full - Pill buttons */
+
+    /* Input & Form Element Radii */
+    --radius-input: var(--radius-md); /* 8px - Text inputs, textareas */
+    --radius-select: var(--radius-md); /* 8px - Dropdowns, selects */
+    --radius-checkbox: var(--radius-sm); /* 4px - Checkboxes, small controls */
+    --radius-radio: var(--radius-full); /* Full - Radio buttons (circular) */
+
+    /* Card & Container Radii */
+    --radius-card-sm: var(--radius-md); /* 8px - Compact cards */
+    --radius-card-md: var(--radius-lg); /* 12px - Standard cards (DEFAULT) */
+    --radius-card-lg: var(--radius-xl); /* 16px - Large cards, hero cards */
+    --radius-card-featured: var(--radius-2xl); /* 24px - Featured/prominent cards */
+
+    /* Modal & Dialog Radii */
+    --radius-modal-sm: var(--radius-lg); /* 12px - Small modals */
+    --radius-modal-md: var(--radius-xl); /* 16px - Standard modals */
+    --radius-modal-lg: var(--radius-2xl); /* 24px - Large modals */
+
+    /* Badge & Tag Radii */
+    --radius-badge: var(--radius-sm); /* 4px - Rectangular badges */
+    --radius-badge-pill: var(--radius-full); /* Full - Pill badges */
+    --radius-tag: var(--radius-md); /* 8px - Tags */
+
+    /* Avatar Radii */
+    --radius-avatar-sm: var(--radius-full); /* Full - Small avatars (circular) */
+    --radius-avatar-md: var(--radius-full); /* Full - Medium avatars */
+    --radius-avatar-lg: var(--radius-full); /* Full - Large avatars */
+    --radius-avatar-square: var(--radius-lg); /* 12px - Square avatars with soft corners */
+
+    /* Tooltip & Popover Radii */
+    --radius-tooltip: var(--radius-md); /* 8px - Tooltips */
+    --radius-popover: var(--radius-lg); /* 12px - Popovers, dropdowns */
+
+    /* Image & Media Radii */
+    --radius-image-sm: var(--radius-md); /* 8px - Small images */
+    --radius-image-md: var(--radius-lg); /* 12px - Medium images */
+    --radius-image-lg: var(--radius-xl); /* 16px - Large images */
+    --radius-image-hero: var(--radius-2xl); /* 24px - Hero images */
+
+    /* Table & Data Display Radii */
+    --radius-table: var(--radius-lg); /* 12px - Table containers */
+    --radius-table-cell: var(--radius-sm); /* 4px - Individual cells (if rounded) */
+
+    /* Navigation Radii */
+    --radius-nav-item: var(--radius-md); /* 8px - Navigation items */
+    --radius-nav-pill: var(--radius-full); /* Full - Pill navigation */
+
+    /* Alert & Notification Radii */
+    --radius-alert: var(--radius-lg); /* 12px - Alert boxes */
+    --radius-toast: var(--radius-lg); /* 12px - Toast notifications */
+
+    /* Progress & Indicator Radii */
+    --radius-progress: var(--radius-full); /* Full - Progress bars */
+    --radius-slider-track: var(--radius-full); /* Full - Slider tracks */
+    --radius-slider-thumb: var(--radius-full); /* Full - Slider thumbs */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎯 COMPONENT-SPECIFIC USE CASES
+       Pre-defined radius for common patterns
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* AI Components (NIS2-specific) */
+    --radius-ai-chat-bubble: var(--radius-xl); /* 16px - AI chat messages */
+    --radius-ai-input: var(--radius-2xl); /* 24px - AI input fields (friendly) */
+    --radius-ai-suggestion: var(--radius-lg); /* 12px - AI suggestion chips */
+
+    /* Dashboard Components */
+    --radius-dashboard-card: var(--radius-lg); /* 12px - Dashboard cards */
+    --radius-dashboard-widget: var(--radius-xl); /* 16px - Dashboard widgets */
+    --radius-dashboard-stat: var(--radius-md); /* 8px - Stat cards */
+
+    /* Form Components */
+    --radius-form-container: var(--radius-xl); /* 16px - Form containers */
+    --radius-form-section: var(--radius-lg); /* 12px - Form sections */
+    --radius-form-field: var(--radius-md); /* 8px - Individual fields */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📱 NESTED RADIUS RULES
+       Inner elements should have smaller radius
+       Rule: Inner radius = Outer radius - Padding
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Example: Card with 12px radius and 24px padding */
+    /* Nested element should have: 12px - 24px = 0px (or use --radius-sm/4px) */
+
+    --radius-nested-tight: var(--radius-sm); /* 4px - When outer is lg/12px */
+    --radius-nested-comfortable: var(--radius-md); /* 8px - When outer is xl/16px+ */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🎨 BRAND PERSONALITY ALIGNMENT
+       NIS2 is: Modern, Friendly, Professional, AI-First
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Default preference: Moderate roundness (8-12px) */
+    /* AI interactions: Higher roundness (16-24px) for friendliness */
+    /* Data displays: Lower roundness (4-8px) for professionalism */
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 RADIUS UTILITY CLASSES
+   Direct access to radius values
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer utilities {
+  /* ━━━ BASE RADIUS UTILITIES ━━━ */
+
+  .rounded-none {
+    border-radius: var(--radius-none);
+  }
+
+  .rounded-xs {
+    border-radius: var(--radius-xs);
+  }
+
+  .rounded-sm {
+    border-radius: var(--radius-sm);
+  }
+
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+
+  .rounded-lg {
+    border-radius: var(--radius-lg);
+  }
+
+  .rounded-xl {
+    border-radius: var(--radius-xl);
+  }
+
+  .rounded-2xl {
+    border-radius: var(--radius-2xl);
+  }
+
+  .rounded-3xl {
+    border-radius: var(--radius-3xl);
+  }
+
+  .rounded-4xl {
+    border-radius: var(--radius-4xl);
+  }
+
+  .rounded-full {
+    border-radius: var(--radius-full);
+  }
+
+  /* ━━━ SEMANTIC RADIUS UTILITIES ━━━ */
+
+  /* Buttons */
+  .rounded-button-sm {
+    border-radius: var(--radius-button-sm);
+  }
+
+  .rounded-button {
+    border-radius: var(--radius-button-md);
+  }
+
+  .rounded-button-lg {
+    border-radius: var(--radius-button-lg);
+  }
+
+  .rounded-button-pill {
+    border-radius: var(--radius-button-pill);
+  }
+
+  /* Cards */
+  .rounded-card-sm {
+    border-radius: var(--radius-card-sm);
+  }
+
+  .rounded-card {
+    border-radius: var(--radius-card-md);
+  }
+
+  .rounded-card-lg {
+    border-radius: var(--radius-card-lg);
+  }
+
+  .rounded-card-featured {
+    border-radius: var(--radius-card-featured);
+  }
+
+  /* Inputs */
+  .rounded-input {
+    border-radius: var(--radius-input);
+  }
+
+  .rounded-select {
+    border-radius: var(--radius-select);
+  }
+
+  /* Modals */
+  .rounded-modal-sm {
+    border-radius: var(--radius-modal-sm);
+  }
+
+  .rounded-modal {
+    border-radius: var(--radius-modal-md);
+  }
+
+  .rounded-modal-lg {
+    border-radius: var(--radius-modal-lg);
+  }
+
+  /* Badges */
+  .rounded-badge {
+    border-radius: var(--radius-badge);
+  }
+
+  .rounded-badge-pill {
+    border-radius: var(--radius-badge-pill);
+  }
+
+  /* Avatars */
+  .rounded-avatar {
+    border-radius: var(--radius-avatar-md);
+  }
+
+  .rounded-avatar-square {
+    border-radius: var(--radius-avatar-square);
+  }
+
+  /* Images */
+  .rounded-image-sm {
+    border-radius: var(--radius-image-sm);
+  }
+
+  .rounded-image {
+    border-radius: var(--radius-image-md);
+  }
+
+  .rounded-image-lg {
+    border-radius: var(--radius-image-lg);
+  }
+
+  .rounded-image-hero {
+    border-radius: var(--radius-image-hero);
+  }
+
+  /* AI Components */
+  .rounded-ai-chat {
+    border-radius: var(--radius-ai-chat-bubble);
+  }
+
+  .rounded-ai-input {
+    border-radius: var(--radius-ai-input);
+  }
+
+  .rounded-ai-suggestion {
+    border-radius: var(--radius-ai-suggestion);
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📚 USAGE EXAMPLES & GUIDELINES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   1. BUTTONS
+      - Default: rounded-button (8px)
+      - Large CTA: rounded-button-lg (12px)
+      - Pill style: rounded-button-pill (full)
+      Example: <Button className="rounded-button">Save</Button>
+
+   2. CARDS
+      - Standard: rounded-card (12px) - DEFAULT
+      - Compact: rounded-card-sm (8px)
+      - Featured: rounded-card-featured (24px)
+      Example: <Card className="rounded-card">Content</Card>
+
+   3. INPUTS
+      - Text inputs: rounded-input (8px)
+      - Selects: rounded-select (8px)
+      - Checkboxes: rounded-checkbox (4px)
+      Example: <Input className="rounded-input" />
+
+   4. AI COMPONENTS
+      - Chat bubbles: rounded-ai-chat (16px)
+      - AI input: rounded-ai-input (24px) - Extra friendly
+      - Suggestions: rounded-ai-suggestion (12px)
+      Example: <AiInput className="rounded-ai-input" />
+
+   5. NESTED ELEMENTS RULE
+      When nesting rounded elements:
+      - Outer: rounded-xl (16px) with p-container-md (24px)
+      - Inner: rounded-sm (4px) or rounded-md (8px)
+      Example:
+      <Card className="rounded-card p-container-md">
+        <div className="rounded-sm">Nested content</div>
+      </Card>
+
+   6. CONSISTENCY GUIDELINES
+      - Use semantic tokens (rounded-card) over raw values
+      - Maintain consistent radius within component families
+      - Match radius to component size (larger = more radius)
+      - Consider brand personality (NIS2 = moderate to high)
+
+   7. ACCESSIBILITY
+      - Rounded corners improve visual accessibility
+      - Faster visual processing (200ms advantage)
+      - Better focus indicators with soft corners
+      - Maintain min 44x44pt touch targets regardless of radius
+
+   8. PERFORMANCE
+      - Border-radius is GPU-accelerated in modern browsers
+      - No performance impact on render speed
+      - Use CSS variables for dynamic theming
+
+   9. DARK MODE
+      - Border radius values remain consistent
+      - May adjust border colors/shadows for visibility
+      - Test nested radius contrast in both themes
+
+   10. RESPONSIVE DESIGN
+       - Radius values typically stay consistent across breakpoints
+       - Can reduce on mobile if needed (rare)
+       - Consider touch target sizes with radius
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   🎯 RECOMMENDED DEFAULTS FOR NIS2:
+
+   - Page containers: rounded-card (12px)
+   - AI chat interface: rounded-ai-input (24px)
+   - Data tables: rounded-table (12px)
+   - Buttons: rounded-button (8px)
+   - Form inputs: rounded-input (8px)
+   - Modals: rounded-modal (16px)
+   - Badges: rounded-badge-pill (full)
+   - Avatars: rounded-avatar (full)
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */

@@ -1,0 +1,256 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 🛒 PRODUCT CARD STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Generic product card component for displaying products in grids.
+ * Used in: Supplier catalog, Product listings, Quote builder
+ *
+ * Structure:
+ * ┌─────────────────────────────────────────────────┐
+ * │ .product-card                                    │
+ * │ ┌─────────────────────────────────────────────┐ │
+ * │ │ .product-card-image-container               │ │
+ * │ │                                   ┌──────┐  │ │
+ * │ │                                   │ %15  │  │ │
+ * │ │                                   └──────┘  │ │
+ * │ │              [IMAGE]                        │ │
+ * │ │                                             │ │
+ * │ └─────────────────────────────────────────────┘ │
+ * │ .product-card-content                           │
+ * │   Cedy Koltuk Takımı                           │
+ * │   Mobilya Dünyası • Oturma Grubu               │
+ * │   ₺59.600  ₺72.000              [−] 2 [+]     │
+ * └─────────────────────────────────────────────────┘
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+@layer components {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CARD CONTAINER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card);
+    border-radius: var(--radius-card-md);
+    overflow: hidden;
+  }
+
+  .product-card[role='button'] {
+    cursor: pointer;
+  }
+
+  .product-card[role='button']:hover {
+    /* No elevation effect, cursor only */
+  }
+
+  .product-card[role='button']:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     IMAGE CONTAINER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-image-container {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    background-color: var(--muted);
+    overflow: hidden;
+    border-radius: var(--radius-card-md);
+    margin: var(--spacing-2);
+    margin-bottom: 0;
+  }
+
+  .product-card-image {
+    object-fit: cover;
+  }
+
+  .product-card[role='button']:hover .product-card-image {
+    /* No zoom effect on hover */
+  }
+
+  .product-card-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: var(--muted);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     DISCOUNT BADGE
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-badges {
+    position: absolute;
+    top: var(--spacing-3);
+    right: var(--spacing-3);
+    z-index: 1;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FAVORITE BUTTON
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-favorite {
+    position: absolute;
+    top: var(--spacing-2);
+    right: var(--spacing-2);
+    z-index: 1;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--card);
+    opacity: 0.9;
+    transition:
+      opacity 200ms ease,
+      transform 200ms ease;
+  }
+
+  .product-card-favorite:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+
+  .product-card-favorite:active {
+    transform: scale(0.95);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CONTENT SECTION
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    padding: var(--spacing-4);
+    padding-top: var(--spacing-3);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NAME & META
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-name {
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--foreground);
+    line-height: 1.4;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .product-card-meta {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-inline-xs);
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+  }
+
+  .product-card-meta-separator {
+    opacity: 0.4;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PRICE
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-inline-sm);
+    margin-top: auto;
+    padding-top: var(--spacing-2);
+  }
+
+  .product-card-price-group {
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-inline-sm);
+    flex: 1;
+    min-width: 0;
+  }
+
+  .product-card-price {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--foreground);
+    letter-spacing: -0.01em;
+  }
+
+  .product-card-compare-price {
+    font-size: 0.8125rem;
+    color: var(--muted-foreground);
+    text-decoration: line-through;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━���━━━━━━━━━━━━━
+     PRODUCT GRID
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-grid {
+    display: grid;
+    gap: var(--spacing-grid-gap);
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  @media (min-width: 640px) {
+    .product-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .product-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Refetching state: dim products while loading new results */
+  .product-grid--refetching {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: opacity 150ms ease;
+  }
+
+  /* Compact variant for smaller spaces */
+  .product-grid--compact {
+    gap: var(--spacing-grid-gap-sm);
+  }
+
+  .product-grid--compact .product-card-content {
+    padding: var(--spacing-3);
+  }
+
+  .product-grid--compact .product-card-price {
+    font-size: 1rem;
+  }
+
+  .product-grid--compact .product-card-name {
+    font-size: 0.875rem;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SHADCN BADGE OVERRIDE (outside @layer)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+.product-card-badge-discount[data-slot='badge'] {
+  background-color: var(--foreground);
+  color: var(--background);
+  border-color: transparent;
+  font-size: 0.75rem;
+  font-weight: 500;
+}

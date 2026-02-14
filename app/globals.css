@@ -1,14 +1,12 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-@import "shadcn/tailwind.css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-inter);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -49,6 +47,8 @@
 
 :root {
   --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -78,8 +78,6 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
 }
 
 .dark {
@@ -118,13 +116,61 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
-    @apply border-border outline-ring/50;
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
-    @apply bg-background text-foreground;
-    @apply bg-background text-foreground;
+    font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  }
+
+  /* Remove focus rings globally - NIS2 uses hover states instead */
+  *:focus-visible {
+    outline: none !important;
+    ring: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Override Tailwind focus-visible ring utilities */
+  .focus-visible\:ring-\[3px\]:focus-visible,
+  .focus-visible\:ring-ring\/50:focus-visible,
+  .focus-visible\:ring-2:focus-visible {
+    --tw-ring-shadow: none !important;
+    box-shadow: none !important;
   }
 }
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 NIS2 DESIGN SYSTEM
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Foundations */
+@import '../styles/foundations/spacing.css';
+@import '../styles/foundations/typography.css';
+@import '../styles/foundations/sizing.css';
+@import '../styles/foundations/radius.css';
+@import '../styles/foundations/shadows.css';
+
+/* Layouts */
+@import '../styles/layouts/page.css';
+
+/* Components */
+@import '../styles/components/sidebar.css';
+@import '../styles/components/header.css';
+@import '../styles/components/button.css';
+@import '../styles/components/input.css';
+@import '../styles/components/select.css';
+@import '../styles/components/combobox.css';
+@import '../styles/components/toggle-group.css';
+@import '../styles/components/textarea.css';
+@import '../styles/components/phone-input.css';
+@import '../styles/components/data-table.css';
+@import '../styles/components/search-input.css';
+@import '../styles/components/tooltip.css';
+@import '../styles/components/supplier-detail.css';
+@import '../styles/components/product-card.css';
+@import '../styles/components/product-card-carousel.css';
+@import '../styles/components/quantity-stepper.css';
+@import '../styles/components/product-summary-card.css';
+@import '../styles/components/empty-state.css';
+@import '../styles/components/product-list.css';
+@import '../styles/components/product-filter.css';

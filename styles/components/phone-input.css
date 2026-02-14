@@ -1,0 +1,84 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 PHONE INPUT COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * UX Research Based Design:
+ * - Clean, minimal look without heavy backgrounds
+ * - Country code visually connected to phone number
+ * - Consistent with input component styling
+ * - Height: 40px (matches --sizing-input-height)
+ *
+ * Component Structure:
+ * [data-slot="phone-input"]           → Outer container
+ *   [data-slot="phone-country-code"]  → Country code prefix (+90)
+ *   [data-slot="input"]               → Actual input field
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+@layer components {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PHONE INPUT CONTAINER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * Container wrapper for phone input
+   * - 40px height to match other inputs
+   * - Consistent border radius
+   */
+  [data-slot='phone-input'] {
+    height: 2.5rem; /* 40px */
+    border-radius: var(--radius-input); /* 8px */
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     COUNTRY CODE PREFIX
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * Country code (+90) styling
+   * - No background color (transparent)
+   * - No right border (cleaner look)
+   * - Minimal padding (12px left, 4px right)
+   * - Subtle text color
+   */
+  [data-slot='phone-country-code'] {
+    background-color: transparent;
+    border-right: none;
+    padding-left: 0.75rem; /* 12px - matches input padding */
+    padding-right: 0.25rem; /* 4px - tight spacing before number */
+    font-size: 1rem; /* 16px */
+    color: var(--muted-foreground);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PHONE NUMBER INPUT
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * Phone number input field
+   * - Minimal left padding (close to country code)
+   * - Standard right padding
+   */
+  [data-slot='phone-input'] [data-slot='input'] {
+    height: 100%;
+    min-height: unset;
+    padding-left: 0.25rem; /* 4px - close to country code */
+    padding-right: 0.75rem; /* 12px */
+    border-radius: 0; /* No inner radius */
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FOCUS STATE (inherited from container)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * Focus handled by container's focus-within
+   * No additional styling needed for inner input
+   */
+  [data-slot='phone-input'] [data-slot='input']:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: transparent;
+  }
+}

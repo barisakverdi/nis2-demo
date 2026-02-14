@@ -1,0 +1,393 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 🔤 NIS2 TYPOGRAPHY SYSTEM
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Based on UX research and accessibility best practices
+ * Font Family: Inter (optimized for digital interfaces)
+ * Scale: Major Third (1.250) for balanced hierarchy
+ * Line Heights: Optimized for readability
+ * Letter Spacing: Fine-tuned for Inter font
+ *
+ * Naming Convention:
+ * - Typography utilities: .text-* (Tailwind style)
+ * - Layout/semantic classes: no prefix (internal use only)
+ */
+
+@layer base {
+  :root {
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📏 FONT SIZES (Major Third Scale: 1.250)
+       Base: 16px (1rem)
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Display (Hero sections, landing pages) */
+    --font-size-display-xl: 4.5rem; /* 72px - Hero headlines */
+    --font-size-display-lg: 3.75rem; /* 60px - Large headlines */
+    --font-size-display-md: 3rem; /* 48px - Section headlines */
+
+    /* Headings (Page titles, section headers) */
+    --font-size-h1: 2.5rem; /* 40px - Page titles */
+    --font-size-h2: 2rem; /* 32px - Major sections */
+    --font-size-h3: 1.625rem; /* 26px - Sub-sections */
+    --font-size-h4: 1.375rem; /* 22px - Card titles */
+    --font-size-h5: 1.125rem; /* 18px - Small headings */
+    --font-size-h6: 1rem; /* 16px - Micro headings */
+
+    /* Body Text (Main content) */
+    --font-size-body-xl: 1.25rem; /* 20px - Large body text */
+    --font-size-body-lg: 1.125rem; /* 18px - Emphasized body */
+    --font-size-body-md: 1rem; /* 16px - Default body */
+    --font-size-body-sm: 0.875rem; /* 14px - Secondary text */
+    --font-size-body-xs: 0.75rem; /* 12px - Captions */
+
+    /* UI Elements (Buttons, labels, badges) */
+    --font-size-ui-lg: 1rem; /* 16px - Large buttons */
+    --font-size-ui-md: 0.875rem; /* 14px - Default UI */
+    --font-size-ui-sm: 0.8125rem; /* 13px - Small UI */
+    --font-size-ui-xs: 0.6875rem; /* 11px - Tiny labels */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📐 LINE HEIGHTS (Optimized for readability)
+       UX Research: 1.5-1.6 for body text
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Display & Headings (Tighter for impact) */
+    --line-height-display: 1.1; /* 110% - Display text */
+    --line-height-heading: 1.2; /* 120% - Headings */
+    --line-height-subheading: 1.3; /* 130% - Sub-headings */
+
+    /* Body Text (Comfortable reading) */
+    --line-height-body-relaxed: 1.75; /* 175% - Long-form content */
+    --line-height-body-normal: 1.6; /* 160% - Default body */
+    --line-height-body-snug: 1.5; /* 150% - Compact content */
+
+    /* UI Elements (Tight for controls) */
+    --line-height-ui: 1.4; /* 140% - Buttons, labels */
+    --line-height-ui-tight: 1.25; /* 125% - Badges, chips */
+    --line-height-ui-none: 1; /* 100% - Icons with text */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       🔠 LETTER SPACING (Inter-specific tuning)
+       Inter is wider than system fonts
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    /* Display & Headings (Tighter for elegance) */
+    --letter-spacing-display: -0.03em; /* -3% - Large display text */
+    --letter-spacing-heading: -0.02em; /* -2% - H1-H3 */
+    --letter-spacing-subheading: -0.01em; /* -1% - H4-H6 */
+
+    /* Body Text (Natural) */
+    --letter-spacing-body: 0em; /* 0% - Default body */
+    --letter-spacing-body-relaxed: 0.01em; /* +1% - Long-form reading */
+
+    /* UI Elements (Slightly wider for clarity) */
+    --letter-spacing-ui: 0.005em; /* +0.5% - Default UI */
+    --letter-spacing-ui-wide: 0.025em; /* +2.5% - All-caps labels */
+    --letter-spacing-ui-wider: 0.05em; /* +5% - Small all-caps */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       ⚖️ FONT WEIGHTS (Inter Variable Font)
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    --font-weight-light: 300; /* Light - Subtle text */
+    --font-weight-regular: 400; /* Regular - Body text */
+    --font-weight-medium: 500; /* Medium - Emphasis */
+    --font-weight-semibold: 600; /* Semibold - Headings */
+    --font-weight-bold: 700; /* Bold - Strong emphasis */
+    --font-weight-extrabold: 800; /* Extrabold - Display */
+
+    /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+       📱 RESPONSIVE SCALING
+       Fluid typography using clamp()
+       ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+    --font-size-display-fluid: clamp(2.5rem, 5vw + 1rem, 4.5rem);
+    --font-size-h1-fluid: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+    --font-size-h2-fluid: clamp(1.5rem, 2.5vw + 0.75rem, 2rem);
+    --font-size-body-fluid: clamp(0.875rem, 1vw + 0.5rem, 1rem);
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎨 TYPOGRAPHY UTILITY CLASSES
+   Use .text-* prefix (Tailwind style)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer components {
+  /* ━━━ DISPLAY TEXT (Hero sections) ━━━ */
+
+  .text-display-xl {
+    font-size: var(--font-size-display-xl);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-display);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-display-lg {
+    font-size: var(--font-size-display-lg);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-display);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-display-md {
+    font-size: var(--font-size-display-md);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-display);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-display-fluid {
+    font-size: var(--font-size-display-fluid);
+    line-height: var(--line-height-display);
+    letter-spacing: var(--letter-spacing-display);
+    font-weight: var(--font-weight-bold);
+  }
+
+  /* ━━━ HEADINGS (Page structure) ━━━ */
+
+  .text-h1 {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-h2 {
+    font-size: var(--font-size-h2);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .text-h3 {
+    font-size: var(--font-size-h3);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-h4 {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-subheading);
+    letter-spacing: var(--letter-spacing-subheading);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-h5 {
+    font-size: var(--font-size-h5);
+    line-height: var(--line-height-subheading);
+    letter-spacing: var(--letter-spacing-subheading);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-h6 {
+    font-size: var(--font-size-h6);
+    line-height: var(--line-height-subheading);
+    letter-spacing: var(--letter-spacing-subheading);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ━━━ BODY TEXT (Content) ━━━ */
+
+  .text-body-xl {
+    font-size: var(--font-size-body-xl);
+    line-height: var(--line-height-body-normal);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-body-lg {
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-body-normal);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-body-md {
+    font-size: var(--font-size-body-md);
+    line-height: var(--line-height-body-normal);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-body-sm {
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-snug);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-body-xs {
+    font-size: var(--font-size-body-xs);
+    line-height: var(--line-height-body-snug);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+  }
+
+  /* Body variants */
+  .text-emphasis {
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-strong {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .text-relaxed {
+    line-height: var(--line-height-body-relaxed);
+    letter-spacing: var(--letter-spacing-body-relaxed);
+  }
+
+  /* ━━━ UI TEXT (Buttons, labels, forms) ━━━ */
+
+  .text-ui-lg {
+    font-size: var(--font-size-ui-lg);
+    line-height: var(--line-height-ui);
+    letter-spacing: var(--letter-spacing-ui);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-ui-md {
+    font-size: var(--font-size-ui-md);
+    line-height: var(--line-height-ui);
+    letter-spacing: var(--letter-spacing-ui);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-ui-sm {
+    font-size: var(--font-size-ui-sm);
+    line-height: var(--line-height-ui);
+    letter-spacing: var(--letter-spacing-ui);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .text-ui-xs {
+    font-size: var(--font-size-ui-xs);
+    line-height: var(--line-height-ui-tight);
+    letter-spacing: var(--letter-spacing-ui-wide);
+    font-weight: var(--font-weight-medium);
+  }
+
+  /* ━━━ SPECIAL PURPOSE ━━━ */
+
+  .text-label {
+    font-size: var(--font-size-ui-sm);
+    line-height: var(--line-height-ui);
+    letter-spacing: var(--letter-spacing-ui);
+    font-weight: var(--font-weight-medium);
+    text-transform: uppercase;
+  }
+
+  .text-caption {
+    font-size: var(--font-size-body-xs);
+    line-height: var(--line-height-body-snug);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+    @apply text-muted-foreground;
+  }
+
+  .text-overline {
+    font-size: var(--font-size-ui-xs);
+    line-height: var(--line-height-ui-tight);
+    letter-spacing: var(--letter-spacing-ui-wider);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+  }
+
+  .text-code {
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.875em; /* Relative to parent */
+    line-height: var(--line-height-body-snug);
+    font-weight: var(--font-weight-regular);
+  }
+
+  .text-quote {
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-body-relaxed);
+    letter-spacing: var(--letter-spacing-body-relaxed);
+    font-weight: var(--font-weight-regular);
+    font-style: italic;
+  }
+
+  /* ━━━ TEXT MODIFIERS ━━━ */
+
+  .text-gradient {
+    background: linear-gradient(
+      135deg,
+      currentColor 0%,
+      color-mix(in oklch, currentColor 80%, transparent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .text-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .text-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   🎯 SEMANTIC COMPONENTS
+   Layout-specific typography (no prefix)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer components {
+  /* Page components */
+  .page-title {
+    font-size: var(--font-size-h1);
+    line-height: var(--line-height-heading);
+    letter-spacing: var(--letter-spacing-heading);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .page-description {
+    font-size: var(--font-size-body-lg);
+    line-height: var(--line-height-body-normal);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+    @apply text-muted-foreground;
+  }
+
+  /* Card components */
+  .card-title {
+    font-size: var(--font-size-h4);
+    line-height: var(--line-height-subheading);
+    letter-spacing: var(--letter-spacing-subheading);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .card-description {
+    font-size: var(--font-size-body-sm);
+    line-height: var(--line-height-body-snug);
+    letter-spacing: var(--letter-spacing-body);
+    font-weight: var(--font-weight-regular);
+    @apply text-muted-foreground;
+  }
+}

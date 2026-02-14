@@ -1,0 +1,154 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 INPUT COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * UX Research Based Design:
+ * - Height: 40px (2.5rem) - matches button height for visual consistency
+ * - Horizontal padding: 12px (0.75rem) - comfortable text spacing
+ * - Border radius: 8px (NIS2 design system --radius-input)
+ * - Font size: 16px - prevents zoom on iOS Safari
+ * - Focus state: Clear ring indication for accessibility
+ *
+ * Sources:
+ * - Material Design 3: 56dp (with label) or 40-48px text fields
+ * - Apple Human Interface Guidelines: 34pt minimum
+ * - Baymard Institute: Form field UX research (40-48px optimal)
+ * - Nielsen Norman Group: Input field best practices
+ * - iOS Safari: 16px font size prevents auto-zoom
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE INPUT STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Default input: 40px height
+ * - Matches button height for visual alignment
+ * - 16px font prevents iOS zoom
+ * - 12px horizontal padding for comfortable text entry
+ */
+[data-slot='input'] {
+  height: 2.5rem; /* 40px - increased from 36px */
+  min-height: 2.5rem;
+  padding-left: 0.75rem; /* 12px */
+  padding-right: 0.75rem; /* 12px */
+  padding-top: 0.5rem; /* 8px */
+  padding-bottom: 0.5rem; /* 8px */
+  border-radius: var(--radius-input); /* 8px */
+  font-size: 1rem; /* 16px - prevents iOS zoom */
+  line-height: 1.5;
+  transition:
+    border-color 150ms ease,
+    box-shadow 200ms ease;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOCUS STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Focus: Border color change only
+ * - No outline ring, clean look
+ * - Border turns to primary color (black)
+ */
+[data-slot='input']:focus {
+  outline: none;
+  border-color: var(--foreground);
+  box-shadow: none;
+}
+
+[data-slot='input']:focus-visible {
+  outline: none;
+  border-color: var(--foreground);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PLACEHOLDER STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Placeholder: Subtle, readable
+ * - Muted color for hierarchy
+ * - Same font size as input text
+ */
+[data-slot='input']::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DISABLED STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Disabled: Clear visual indication
+ * - Reduced opacity
+ * - Not-allowed cursor
+ */
+[data-slot='input']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--muted);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ERROR STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Error: Red border for validation feedback
+ * Uses aria-invalid for semantic styling
+ */
+[data-slot='input'][aria-invalid='true'] {
+  border-color: var(--destructive);
+}
+
+[data-slot='input'][aria-invalid='true']:focus {
+  border-color: var(--destructive);
+  box-shadow: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   WITH ICONS (FUTURE ENHANCEMENT)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Input with left icon: Extra left padding
+ * Used when input has search icon, etc.
+ */
+[data-slot='input'][data-has-icon='left'] {
+  padding-left: 2.5rem; /* 40px - space for icon */
+}
+
+/**
+ * Input with right icon: Extra right padding
+ * Used when input has clear button, password toggle, etc.
+ */
+[data-slot='input'][data-has-icon='right'] {
+  padding-right: 2.5rem; /* 40px - space for icon */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   NUMBER INPUT SPINNERS REMOVAL
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Remove number input spinners globally
+ * - Cleaner appearance for numeric inputs
+ * - Works across all browsers (Chrome, Firefox, Safari)
+ */
+
+/* Chrome, Safari, Edge, Opera */
+[data-slot='input'][type='number']::-webkit-outer-spin-button,
+[data-slot='input'][type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+[data-slot='input'][type='number'] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}

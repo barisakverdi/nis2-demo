@@ -1,0 +1,48 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 HEADER COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * UX Research Based Design:
+ * - Height: 56px for desktop dashboards (Material Design standard)
+ * - Touch targets: 36px desktop, 40px mobile (Apple HIG)
+ * - Icon size: 18px for toolbar icons (balanced visibility)
+ * - Spacing: 8px grid system with 16px horizontal padding
+ *
+ * Sources:
+ * - Material Design 3: App bar guidelines
+ * - Apple Human Interface Guidelines: Navigation bar specs
+ * - Carbon Design System: Header patterns
+ *
+ * Note: Header layout uses inline Tailwind classes in layout.tsx.
+ * This file contains CSS custom properties for reference.
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CSS CUSTOM PROPERTIES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root {
+  /* Header heights following Material Design guidelines */
+  --height-header: 56px;
+  --height-header-collapsed: 48px;
+
+  /* Header action button size */
+  --size-header-button: 36px;
+  --size-header-button-mobile: 40px;
+
+  /* Header icon size */
+  --size-header-icon: 18px;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE ADJUSTMENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Mobile: Larger touch targets (40px minimum per Apple HIG) */
+@media (max-width: 640px) {
+  :root {
+    --size-header-button: 40px;
+  }
+}

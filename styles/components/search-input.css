@@ -1,0 +1,204 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 SEARCH INPUT COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Global search input styling for consistent search UX across the app.
+ * Uses the design system tokens for spacing, radius, and shadows.
+ *
+ * Structure:
+ * <div class="search-input">
+ *   <Search class="search-input-icon" />
+ *   <Input class="search-input-field" />
+ * </div>
+ *
+ * Or with clear button:
+ * <div class="search-input">
+ *   <Search class="search-input-icon" />
+ *   <Input class="search-input-field" />
+ *   <button class="search-input-clear">
+ *     <X />
+ *   </button>
+ * </div>
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+@layer components {
+  /* ─────────────────────────────────────────
+     Search Input Container
+     ───────────────────────────────────────── */
+  .search-input {
+    @apply relative flex items-center;
+  }
+
+  /* Sizing variants */
+  .search-input-sm {
+    /* Small variant for compact spaces */
+  }
+
+  .search-input-md {
+    /* Default - no additional styles needed */
+  }
+
+  .search-input-lg {
+    /* Large variant for prominent search */
+  }
+
+  /* Width variants */
+  .search-input-fluid {
+    @apply flex-1;
+    min-width: 10rem; /* 160px */
+  }
+
+  .search-input-fixed {
+    width: 16rem; /* 256px */
+  }
+
+  .search-input-constrained {
+    @apply flex-1;
+    min-width: 12.5rem; /* 200px */
+    max-width: 24rem; /* 384px */
+  }
+
+  /* ─────────────────────────────────────────
+     Search Icon (Left)
+     ───────────────────────────────────────── */
+  .search-input-icon {
+    @apply absolute top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none;
+    left: var(--spacing-3); /* 12px */
+    height: var(--size-icon-input); /* 16px - design system token */
+    width: var(--size-icon-input); /* 16px - design system token */
+    z-index: 1;
+    transition: color 150ms ease;
+  }
+
+  /* Icon color change on container focus */
+  .search-input:focus-within .search-input-icon {
+    color: var(--foreground);
+  }
+
+  /* ─────────────────────────────────────────
+     Search Input Field
+     Using [data-slot] + class for proper specificity
+     over inline Tailwind classes in component
+     ───────────────────────────────────────── */
+  [data-slot='input'].search-input-field {
+    /* Layout - override inline px-3 */
+    width: 100%;
+    padding-left: 2.25rem !important; /* 36px - icon (16px) + spacing (12px) + gap (8px) */
+    padding-right: var(--spacing-3); /* 12px */
+
+    /* Sizing - design system standard */
+    height: 2.5rem; /* 40px */
+    min-height: 2.5rem;
+
+    /* Typography - smaller for data table context */
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.5;
+
+    /* Border & Radius - design system tokens */
+    border: 1px solid var(--border);
+    border-radius: var(--radius-input); /* 8px */
+    background-color: var(--background);
+
+    /* Shadow - subtle inner shadow for depth */
+    box-shadow: var(--shadow-inner-sm);
+
+    /* Smooth transitions */
+    transition:
+      border-color 150ms ease,
+      box-shadow 200ms ease,
+      background-color 150ms ease;
+  }
+
+  /* Placeholder */
+  [data-slot='input'].search-input-field::placeholder {
+    color: var(--muted-foreground);
+    opacity: 0.7;
+  }
+
+  /* Focus state */
+  [data-slot='input'].search-input-field:focus {
+    outline: none;
+    border-color: var(--foreground);
+    box-shadow: var(--shadow-input-focus);
+    background-color: var(--background);
+  }
+
+  [data-slot='input'].search-input-field:focus-visible {
+    outline: none;
+    ring: none;
+  }
+
+  /* Hover state */
+  [data-slot='input'].search-input-field:hover:not(:focus) {
+    border-color: var(--muted-foreground);
+  }
+
+  /* Disabled state */
+  [data-slot='input'].search-input-field:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--muted);
+  }
+
+  /* ─────────────────────────────────────────
+     Clear Button (Optional - Right Side)
+     ───────────────────────────────────────── */
+  .search-input-clear {
+    @apply absolute top-1/2 -translate-y-1/2 flex items-center justify-center;
+    @apply text-muted-foreground hover:text-foreground;
+    @apply opacity-0 transition-opacity;
+    right: var(--spacing-2); /* 8px */
+    height: var(--sizing-6); /* 24px */
+    width: var(--sizing-6); /* 24px */
+    border-radius: var(--radius-sm); /* 4px */
+  }
+
+  .search-input-clear:hover {
+    background-color: var(--muted);
+  }
+
+  /* Show clear button when input has value */
+  .search-input:has([data-slot='input']:not(:placeholder-shown)) .search-input-clear {
+    opacity: 1;
+  }
+
+  /* Add right padding when clear button is present */
+  .search-input:has(.search-input-clear) [data-slot='input'].search-input-field {
+    padding-right: 2.25rem !important; /* 36px - space for clear button */
+  }
+
+  /* ─────────────────────────────────────────
+     Size Variants - Icon Adjustments
+     ───────────────────────────────────────── */
+
+  /* Small size */
+  .search-input-sm .search-input-icon {
+    left: var(--spacing-2); /* 8px */
+    height: var(--size-icon-xs); /* 12px */
+    width: var(--size-icon-xs); /* 12px */
+  }
+
+  .search-input-sm [data-slot='input'].search-input-field {
+    height: 2rem; /* 32px */
+    min-height: 2rem;
+    padding-left: 1.625rem !important; /* 26px - icon(12px) + left(8px) + gap(6px) */
+    font-size: 0.8125rem; /* 13px */
+  }
+
+  /* Large size */
+  .search-input-lg .search-input-icon {
+    left: var(--spacing-4); /* 16px */
+    height: var(--size-icon-md); /* 20px */
+    width: var(--size-icon-md); /* 20px */
+  }
+
+  .search-input-lg [data-slot='input'].search-input-field {
+    height: 3rem; /* 48px */
+    min-height: 3rem;
+    padding-left: 2.75rem !important; /* 44px */
+    font-size: 1rem; /* 16px */
+    border-radius: var(--radius-lg); /* 12px */
+  }
+}

@@ -1,0 +1,253 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 📭 NIS2 EMPTY STATE COMPONENT
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Modern empty state with dotted grid background pattern
+ * and subtle radial glow around the center icon.
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CSS CUSTOM PROPERTIES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root {
+  /* Dot grid pattern */
+  --empty-state-dot-color: var(--border);
+  --empty-state-dot-size: 2px;
+  --empty-state-dot-gap: 20px;
+
+  /* Center circle - uses project tokens */
+  --empty-state-center-size: 96px;
+  --empty-state-center-bg: var(--muted);
+  --empty-state-icon-size: 40px;
+  --empty-state-icon-color: var(--muted-foreground);
+
+  /* Glow effect */
+  --empty-state-glow-color: oklch(0.95 0 0 / 0.8);
+  --empty-state-glow-size: 180px;
+}
+
+.dark {
+  --empty-state-glow-color: oklch(0.25 0 0 / 0.6);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE COMPONENT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer components {
+  /* Wrapper for centering empty state vertically on page */
+  .empty-state-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 280px);
+    width: 100%;
+    padding-top: 36px;
+  }
+
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: var(--spacing-8); /* 32px */
+    width: 100%;
+    position: relative;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     DOTTED GRID BACKGROUND
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .empty-state-background {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .empty-state-dots {
+    position: absolute;
+    inset: -50px;
+    background-image: radial-gradient(
+      circle,
+      var(--empty-state-dot-color) var(--empty-state-dot-size),
+      transparent var(--empty-state-dot-size)
+    );
+    background-size: var(--empty-state-dot-gap) var(--empty-state-dot-gap);
+    mask-image: radial-gradient(ellipse 50% 45% at 50% 35%, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 50% 45% at 50% 35%, black 0%, transparent 70%);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CENTER ICON CONTAINER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .empty-state-icon-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: var(--spacing-6); /* 24px */
+    z-index: 1;
+  }
+
+  /* Subtle glow effect behind center */
+  .empty-state-glow {
+    position: absolute;
+    width: var(--empty-state-glow-size);
+    height: var(--empty-state-glow-size);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--empty-state-glow-color) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .empty-state-center {
+    position: relative;
+    z-index: 2;
+    width: var(--empty-state-center-size);
+    height: var(--empty-state-center-size);
+    border-radius: 50%;
+    background-color: var(--empty-state-center-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .empty-state-icon {
+    width: var(--empty-state-icon-size);
+    height: var(--empty-state-icon-size);
+    color: var(--empty-state-icon-color);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CONTENT
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .empty-state-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2); /* 8px */
+    max-width: 360px;
+    margin-bottom: var(--spacing-6); /* 24px */
+    position: relative;
+    z-index: 10;
+  }
+
+  .empty-state-title {
+    font-size: 1.25rem; /* 20px */
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--foreground);
+  }
+
+  .empty-state-description {
+    font-size: 0.9375rem; /* 15px */
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ACTIONS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .empty-state-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-3); /* 12px */
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SIZE VARIANTS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /* Small variant */
+  .empty-state--sm {
+    --empty-state-center-size: 72px;
+    --empty-state-icon-size: 28px;
+    --empty-state-glow-size: 140px;
+    --empty-state-dot-gap: 18px;
+    padding: var(--spacing-6);
+  }
+
+  .empty-state--sm .empty-state-title {
+    font-size: 1rem;
+  }
+
+  .empty-state--sm .empty-state-description {
+    font-size: 0.875rem;
+  }
+
+  .empty-state--sm .empty-state-content {
+    max-width: 280px;
+    margin-bottom: var(--spacing-4); /* 16px */
+  }
+
+  .empty-state--sm .empty-state-icon-container {
+    margin-bottom: var(--spacing-4); /* 16px */
+  }
+
+  /* Large variant */
+  .empty-state--lg {
+    --empty-state-center-size: 112px;
+    --empty-state-icon-size: 44px;
+    --empty-state-glow-size: 220px;
+    --empty-state-dot-gap: 22px;
+    padding: var(--spacing-12);
+  }
+
+  .empty-state--lg .empty-state-title {
+    font-size: 1.5rem;
+  }
+
+  .empty-state--lg .empty-state-description {
+    font-size: 1rem;
+  }
+
+  .empty-state--lg .empty-state-content {
+    max-width: 420px;
+    margin-bottom: var(--spacing-8); /* 32px */
+  }
+
+  .empty-state--lg .empty-state-icon-container {
+    margin-bottom: var(--spacing-8); /* 32px */
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE ADJUSTMENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Mobile adjustments */
+@media (max-width: 639px) {
+  .empty-state-wrapper {
+    min-height: calc(100vh - 240px);
+    padding-top: 40px;
+  }
+
+  .empty-state {
+    --empty-state-center-size: 80px;
+    --empty-state-icon-size: 32px;
+    --empty-state-glow-size: 150px;
+    --empty-state-dot-gap: 18px;
+  }
+
+  .empty-state-title {
+    font-size: 1.125rem;
+  }
+
+  .empty-state-description {
+    font-size: 0.875rem;
+  }
+
+  .empty-state-dots {
+    mask-image: radial-gradient(ellipse 60% 45% at 50% 35%, black 0%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse 60% 45% at 50% 35%, black 0%, transparent 70%);
+  }
+}

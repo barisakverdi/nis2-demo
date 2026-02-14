@@ -1,0 +1,145 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * QUANTITY STEPPER STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Compact +/- stepper for quantity control in product cards
+ * and other contexts (quote builder, cart, order forms).
+ *
+ * States:
+ * ┌──────────────────────────────────────────────────────────────┐
+ * │ Collapsed (qty = 0):   [+]                                  │
+ * │ Expanded  (qty >= 1):  [−] [2] [+]                          │
+ * └──────────────────────────────────────────────────────────────┘
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+@layer components {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     EXPANDED CONTAINER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .quantity-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    flex-shrink: 0;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     COLLAPSED ADD BUTTON
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .quantity-stepper-add {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--border);
+    background-color: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease,
+      transform 150ms ease;
+  }
+
+  .quantity-stepper-add:hover {
+    background-color: var(--accent);
+    border-color: var(--foreground);
+  }
+
+  .quantity-stepper-add:active {
+    transform: scale(0.92);
+  }
+
+  .quantity-stepper-add:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .quantity-stepper-add:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     INCREMENT / DECREMENT BUTTONS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .quantity-stepper-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-button-sm);
+    border: 1.5px solid var(--border);
+    background-color: var(--background);
+    color: var(--foreground);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      background-color 150ms ease,
+      border-color 150ms ease;
+  }
+
+  .quantity-stepper-button:hover:not(:disabled) {
+    background-color: var(--accent);
+    border-color: var(--foreground);
+  }
+
+  .quantity-stepper-button:active:not(:disabled) {
+    background-color: var(--accent);
+  }
+
+  .quantity-stepper-button:focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+
+  .quantity-stepper-button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NUMBER INPUT
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .quantity-stepper-input {
+    width: 32px;
+    height: 28px;
+    text-align: center;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    color: var(--foreground);
+    background-color: var(--background);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-button-sm);
+    padding: 0;
+    -moz-appearance: textfield;
+    transition: border-color 150ms ease;
+  }
+
+  .quantity-stepper-input::-webkit-outer-spin-button,
+  .quantity-stepper-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  .quantity-stepper-input:focus {
+    outline: none;
+    border-color: var(--ring);
+  }
+
+  .quantity-stepper-input:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}

@@ -1,0 +1,80 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 COMBOBOX COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Matches Select styling for visual consistency:
+ * - Focus: Border turns to primary color (black)
+ * - Uses role="combobox" selector to target only combobox triggers
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE COMBOBOX TRIGGER STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Base styles for combobox trigger buttons
+ * - Matches select border and transition
+ * - Uses role="combobox" to target regardless of data-slot
+ *   (PopoverTrigger asChild sets data-slot="popover-trigger")
+ */
+[role='combobox'] {
+  border-color: var(--input);
+  transition:
+    border-color 150ms ease,
+    box-shadow 200ms ease;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOCUS STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Focus: Border color change only
+ * - No outline ring, clean look
+ * - Border turns to primary color (black)
+ * - Matches Select focus behavior
+ */
+[role='combobox']:focus {
+  outline: none;
+  border-color: var(--foreground);
+  box-shadow: none;
+}
+
+[role='combobox']:focus-visible {
+  outline: none;
+  border-color: var(--foreground);
+  box-shadow: none;
+  --tw-ring-shadow: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   OPEN STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * When combobox is open (expanded)
+ * - Keep the focus border
+ */
+[role='combobox'][aria-expanded='true'] {
+  border-color: var(--foreground);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ERROR STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Error: Red border for validation feedback
+ * Uses [data-invalid] wrapper pattern for parent-driven error state
+ * (combobox trigger doesn't support aria-invalid natively)
+ */
+[data-invalid] [role='combobox'] {
+  border-color: var(--destructive);
+}
+
+[data-invalid] [role='combobox']:focus {
+  border-color: var(--destructive);
+  box-shadow: none;
+}

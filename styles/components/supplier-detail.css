@@ -1,0 +1,279 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 📄 SUPPLIER DETAIL PAGE STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Styles for the supplier detail page layout and components.
+ *
+ * Structure:
+ * ┌─────────────────────────────────────────────────────────┐
+ * │ .supplier-detail-header                                  │
+ * │ ├── .supplier-detail-header-left (avatar + info)        │
+ * │ └── .supplier-detail-header-actions (edit button)       │
+ * ├─────────────────────────────────────────────────────────┤
+ * │ .supplier-detail-layout                                  │
+ * │ ├── .supplier-detail-sidebar (details panel)            │
+ * │ └── .supplier-detail-main (tabs)                        │
+ * └─────────────────────────────────────────────────────────┘
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+@layer components {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     HEADER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .supplier-detail-header {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-stack-md);
+    margin-bottom: var(--spacing-layout-md);
+  }
+
+  @media (min-width: 640px) {
+    .supplier-detail-header {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }
+  }
+
+  .supplier-detail-header-left {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-inline-xl);
+  }
+
+  .supplier-detail-avatar[data-slot='avatar'] {
+    width: 3rem !important;
+    height: 3rem !important;
+    flex-shrink: 0;
+    border-radius: var(--radius-xl);
+  }
+
+  .supplier-detail-avatar [data-slot='avatar-fallback'] {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-xl);
+  }
+
+  .supplier-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-stack-xs);
+    min-width: 0;
+  }
+
+  .supplier-detail-title-row {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-inline-md);
+    flex-wrap: wrap;
+  }
+
+  .supplier-detail-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .supplier-detail-name {
+      font-size: 1.75rem;
+    }
+  }
+
+  .supplier-detail-meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-inline-sm);
+    color: var(--muted-foreground);
+    font-size: 0.8125rem;
+  }
+
+  .supplier-detail-meta-separator {
+    color: var(--muted-foreground);
+    opacity: 0.5;
+  }
+
+  .supplier-detail-meta-item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-inline-xs);
+  }
+
+  .supplier-detail-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-inline-sm);
+    flex-shrink: 0;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     LAYOUT
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .supplier-detail-layout {
+    display: grid;
+    gap: var(--spacing-layout-lg);
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 1024px) {
+    .supplier-detail-layout {
+      grid-template-columns: 280px 1fr;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .supplier-detail-layout {
+      grid-template-columns: 300px 1fr;
+    }
+  }
+
+  .supplier-detail-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-stack-md);
+  }
+
+  .supplier-detail-main {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-stack-md);
+    min-width: 0;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     DETAILS PANEL
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .supplier-details-panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-stack-lg);
+  }
+
+  .supplier-details-title {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.02em;
+    margin: 0;
+    padding: var(--spacing-3) 0;
+    border-bottom: 1px solid var(--border);
+    line-height: 1.25rem;
+  }
+
+  .supplier-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-stack-lg);
+  }
+
+  .supplier-detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-inline-md);
+  }
+
+  .supplier-detail-row-icon {
+    color: var(--muted-foreground);
+    flex-shrink: 0;
+    margin-top: 0.125rem;
+  }
+
+  .supplier-detail-row-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.125rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .supplier-detail-row-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--muted-foreground);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .supplier-detail-row-value {
+    font-size: 0.875rem;
+    color: var(--foreground);
+    word-break: break-word;
+  }
+
+  .supplier-detail-row-empty {
+    color: var(--muted-foreground);
+    font-style: italic;
+  }
+
+  .supplier-detail-link {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 150ms ease;
+  }
+
+  .supplier-detail-link:hover {
+    text-decoration: underline;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TAB COUNT BADGE
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .tab-count {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.25rem;
+    height: 1.25rem;
+    padding: 0 var(--spacing-1);
+    margin-left: var(--spacing-inline-sm);
+    font-size: 0.6875rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--muted-foreground);
+    background-color: var(--muted);
+    border-radius: var(--radius-full);
+    transition:
+      background-color 150ms ease,
+      color 150ms ease;
+  }
+
+  /* Active tab state */
+  [data-state='active'] .tab-count {
+    color: var(--primary-foreground);
+    background-color: var(--primary);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     TABS EMPTY STATE
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .supplier-tab-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-stack-sm);
+    padding: var(--spacing-layout-xl) var(--spacing-container-md);
+    text-align: center;
+  }
+
+  .supplier-tab-empty h3 {
+    margin: 0;
+    color: var(--foreground);
+  }
+
+  .supplier-tab-empty p {
+    margin: 0;
+    max-width: 300px;
+  }
+}

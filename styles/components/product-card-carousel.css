@@ -1,0 +1,148 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * PRODUCT CARD CAROUSEL STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Carousel overrides for product card image container.
+ * Uses Shadcn Carousel (embla-carousel) with custom positioning.
+ *
+ * Structure:
+ * ┌─────────────────────────────────────────────────────┐
+ * │ .product-card-image-container                       │
+ * │ ┌─────────────────────────────────────────────────┐ │
+ * │ │ [data-slot="carousel"]                          │ │
+ * │ │  ┌───────────────────────────────────────────┐  │ │
+ * │ │  │ slide 1 │ slide 2 │ slide 3               │  │ │
+ * │ │  └───────────────────────────────────────────┘  │ │
+ * │ │         [◄]                     [►]             │ │
+ * │ │              ● ○ ○  (dots)                      │ │
+ * │ └─────────────────────────────────────────────────┘ │
+ * └─────────────────────────────────────────────────────┘
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+@layer components {
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CAROUSEL WRAPPER (fills image container)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     CAROUSEL CONTENT (remove default gaps)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-carousel [data-slot='carousel-content'] {
+    margin-left: 0;
+    height: 100%;
+  }
+
+  .product-card-carousel [data-slot='carousel-content'] > div {
+    height: 100%;
+  }
+
+  .product-card-carousel [data-slot='carousel-item'] {
+    padding-left: 0;
+    height: 100%;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SLIDE (each image fills full area)
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     NAVIGATION ARROWS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-carousel [data-slot='carousel-previous'],
+  .product-card-carousel [data-slot='carousel-next'] {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 28px;
+    border-radius: var(--radius-full);
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    color: var(--foreground);
+    opacity: 0;
+    transition: opacity 150ms ease;
+    z-index: 2;
+    pointer-events: auto;
+  }
+
+  .product-card-carousel [data-slot='carousel-previous'] {
+    left: var(--spacing-2);
+  }
+
+  .product-card-carousel [data-slot='carousel-next'] {
+    right: var(--spacing-2);
+  }
+
+  /* Show arrows on card hover */
+  .product-card-image-container:hover .product-card-carousel [data-slot='carousel-previous'],
+  .product-card-image-container:hover .product-card-carousel [data-slot='carousel-next'] {
+    opacity: 1;
+  }
+
+  .product-card-carousel [data-slot='carousel-previous']:hover,
+  .product-card-carousel [data-slot='carousel-next']:hover {
+    background-color: var(--accent);
+    border-color: var(--foreground);
+  }
+
+  /* Hide arrows when can't scroll */
+  .product-card-carousel [data-slot='carousel-previous']:disabled,
+  .product-card-carousel [data-slot='carousel-next']:disabled {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     DOT INDICATORS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  .product-card-carousel-dots {
+    position: absolute;
+    bottom: var(--spacing-2);
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-1);
+    z-index: 2;
+    padding: 4px 8px;
+    border-radius: var(--radius-full);
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+
+  .product-card-carousel-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: var(--radius-full);
+    background-color: var(--background);
+    opacity: 0.5;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: opacity 150ms ease;
+  }
+
+  .product-card-carousel-dot[data-active='true'] {
+    opacity: 1;
+  }
+
+  .product-card-carousel-dot:hover {
+    opacity: 0.8;
+  }
+}

@@ -1,0 +1,177 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 BUTTON COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * UX Research Based Design:
+ * - Minimum touch target: 44x44px (WCAG 2.2 Success Criterion 2.5.8)
+ * - Default height: 40px (accessible while maintaining visual balance)
+ * - Large height: 44px (WCAG compliant primary actions)
+ * - Border radius: 8px (NIS2 design system --radius-button-md)
+ * - Horizontal padding: 16px default, 24px large
+ * - Font weight: 500 (medium) for better legibility
+ *
+ * Sources:
+ * - WCAG 2.2 Target Size (Level AAA): 44x44px minimum
+ * - Material Design 3: 40px default button height
+ * - Apple Human Interface Guidelines: 44pt touch targets
+ * - Nielsen Norman Group: Button design best practices
+ * - Figma best practices: 40-44px button heights
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE BUTTON STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Default button: 40px height (2.5rem)
+ * Research shows 40px is the sweet spot for desktop interfaces
+ * - Visually proportional
+ * - Accessible for most users
+ * - Pairs well with 40px input fields
+ */
+[data-slot='button'] {
+  height: 2.5rem; /* 40px - increased from 36px */
+  min-height: 2.5rem;
+  padding-left: 1rem; /* 16px */
+  padding-right: 1rem; /* 16px */
+  border-radius: var(--radius-button-md); /* 8px */
+  font-weight: 500;
+  transition:
+    background-color 150ms ease,
+    box-shadow 200ms ease,
+    transform 100ms ease;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SIZE VARIANTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Small button: 36px height
+ * For compact UI areas, secondary actions
+ */
+[data-slot='button'][data-size='sm'] {
+  height: 2.25rem; /* 36px */
+  min-height: 2.25rem;
+  padding-left: 0.75rem; /* 12px */
+  padding-right: 0.75rem; /* 12px */
+  font-size: 0.875rem; /* 14px */
+}
+
+/**
+ * Large button: 44px height
+ * WCAG 2.2 compliant touch target
+ * For primary CTAs, mobile-friendly buttons
+ */
+[data-slot='button'][data-size='lg'] {
+  height: 2.75rem; /* 44px - WCAG compliant */
+  min-height: 2.75rem;
+  padding-left: 1.5rem; /* 24px */
+  padding-right: 1.5rem; /* 24px */
+  font-size: 1rem; /* 16px */
+}
+
+/**
+ * Icon button: 40x40px square
+ * Maintains touch target while being visually balanced
+ */
+[data-slot='button'][data-size='icon'] {
+  height: 2.5rem; /* 40px */
+  width: 2.5rem; /* 40px */
+  min-height: 2.5rem;
+  min-width: 2.5rem;
+  padding: 0;
+}
+
+/**
+ * Icon button small: 36x36px square
+ */
+[data-slot='button'][data-size='icon-sm'] {
+  height: 2.25rem; /* 36px */
+  width: 2.25rem; /* 36px */
+  min-height: 2.25rem;
+  min-width: 2.25rem;
+  padding: 0;
+}
+
+/**
+ * Icon button large: 44x44px square (WCAG compliant)
+ */
+[data-slot='button'][data-size='icon-lg'] {
+  height: 2.75rem; /* 44px */
+  width: 2.75rem; /* 44px */
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   HOVER & FOCUS STATES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Hover: Subtle elevation effect
+ * Research shows shadow on hover improves click affordance
+ */
+[data-slot='button']:not(:disabled):hover {
+  box-shadow: var(--shadow-button-hover);
+}
+
+/**
+ * Focus: Clear focus ring for accessibility
+ * WCAG 2.4.7: Focus visible
+ */
+[data-slot='button']:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/**
+ * Active: Pressed state feedback
+ * Brief scale down for tactile feedback
+ */
+[data-slot='button']:not(:disabled):active {
+  transform: scale(0.98);
+  box-shadow: var(--shadow-button-active);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FULL WIDTH VARIANT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Full width buttons (common in forms, auth pages)
+ * Maintains proper height with full container width
+ */
+[data-slot='button'].w-full {
+  width: 100%;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DISABLED STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Disabled: Reduced opacity, no pointer events
+ * Clear visual indication button is inactive
+ */
+[data-slot='button']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ICON STYLING
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Remove margin from icons inside buttons
+ * Overrides Tailwind's mr-2/ml-2 classes on SVG icons
+ */
+[data-slot='button'] svg {
+  margin-right: 0;
+  margin-left: 0;
+}

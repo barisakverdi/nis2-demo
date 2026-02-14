@@ -1,0 +1,84 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 SELECT COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Matches Input styling for visual consistency:
+ * - Default Height: 40px (2.5rem) - matches input/button height
+ * - Small Height: 32px (2rem) - for compact UI like pagination
+ * - Horizontal padding: 12px (0.75rem)
+ * - Border radius: 8px (--radius-input)
+ * - Font size: 16px - prevents zoom on iOS Safari
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE SELECT TRIGGER STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Base styles for all sizes
+ * - Border radius and transitions
+ */
+[data-slot='select-trigger'] {
+  border-radius: var(--radius-input); /* 8px */
+  transition:
+    border-color 150ms ease,
+    box-shadow 200ms ease;
+}
+
+/**
+ * Default size: 40px height
+ * - Matches input height for visual alignment
+ * - 16px font prevents iOS zoom
+ */
+[data-slot='select-trigger'][data-size='default'],
+[data-slot='select-trigger']:not([data-size]) {
+  height: 2.5rem; /* 40px */
+  min-height: 2.5rem;
+  padding-left: 0.75rem; /* 12px */
+  padding-right: 0.75rem; /* 12px */
+  font-size: 1rem; /* 16px - prevents iOS zoom */
+}
+
+/**
+ * Small size: 32px height
+ * - For compact UI elements like pagination
+ */
+[data-slot='select-trigger'][data-size='sm'] {
+  height: 2rem; /* 32px */
+  min-height: 2rem;
+  padding-left: 0.5rem; /* 8px */
+  padding-right: 0.5rem; /* 8px */
+  font-size: 0.875rem; /* 14px */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOCUS STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Focus: Border color change only
+ * - No outline ring, clean look
+ * - Border turns to primary color (black)
+ */
+[data-slot='select-trigger']:focus {
+  outline: none;
+  border-color: var(--foreground);
+  box-shadow: none;
+}
+
+[data-slot='select-trigger']:focus-visible {
+  outline: none;
+  border-color: var(--foreground);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DISABLED STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+[data-slot='select-trigger']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--muted);
+}

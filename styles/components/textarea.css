@@ -1,0 +1,150 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * NIS2 TEXTAREA COMPONENT STYLES
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * UX Research Based Design:
+ * - Consistent with input component styling
+ * - Fixed height variants for predictable layouts
+ * - Resize disabled by default for clean UI
+ * - 16px font size prevents iOS Safari zoom
+ *
+ * Sources:
+ * - Nielsen Norman Group: Form field best practices
+ * - Baymard Institute: Multi-line input research
+ * - iOS Safari: 16px font prevents auto-zoom
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BASE TEXTAREA STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Default textarea styling
+ * - Matches input component visual style
+ * - No resize by default for clean layouts
+ * - 16px font prevents iOS zoom
+ */
+[data-slot='textarea'] {
+  padding: 0.75rem; /* 12px all sides */
+  border-radius: var(--radius-input); /* 8px */
+  font-size: 1rem; /* 16px - prevents iOS zoom */
+  line-height: 1.5;
+  resize: none; /* Disabled by default */
+  transition:
+    border-color 150ms ease,
+    box-shadow 200ms ease;
+  field-sizing: fixed; /* Override shadcn's field-sizing-content */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FIXED HEIGHT VARIANTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Small textarea: ~80px (3 lines)
+ */
+[data-slot='textarea'][data-size='sm'] {
+  min-height: 5rem; /* 80px */
+  height: 5rem;
+}
+
+/**
+ * Default textarea: ~100px (4 lines)
+ * Used when no size specified
+ */
+[data-slot='textarea'] {
+  min-height: 6.25rem; /* 100px */
+  height: 6.25rem;
+}
+
+/**
+ * Medium textarea: ~120px (5 lines)
+ */
+[data-slot='textarea'][data-size='md'] {
+  min-height: 7.5rem; /* 120px */
+  height: 7.5rem;
+}
+
+/**
+ * Large textarea: ~160px (7 lines)
+ */
+[data-slot='textarea'][data-size='lg'] {
+  min-height: 10rem; /* 160px */
+  height: 10rem;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESIZABLE VARIANT
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Allow vertical resize when needed
+ */
+[data-slot='textarea'][data-resizable='true'] {
+  resize: vertical;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   FOCUS STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Focus: Border color change only
+ * - Matches input focus behavior
+ * - No outline ring, clean look
+ */
+[data-slot='textarea']:focus {
+  outline: none;
+  border-color: var(--foreground);
+  box-shadow: none;
+}
+
+[data-slot='textarea']:focus-visible {
+  outline: none;
+  border-color: var(--foreground);
+  ring: none;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PLACEHOLDER STYLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Placeholder: Subtle, readable
+ * - Matches input placeholder
+ */
+[data-slot='textarea']::placeholder {
+  color: var(--muted-foreground);
+  opacity: 0.7;
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   DISABLED STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Disabled: Clear visual indication
+ */
+[data-slot='textarea']:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: var(--muted);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ERROR STATE
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/**
+ * Error: Red border for validation feedback
+ */
+[data-slot='textarea'][aria-invalid='true'] {
+  border-color: var(--destructive);
+}
+
+[data-slot='textarea'][aria-invalid='true']:focus {
+  border-color: var(--destructive);
+  box-shadow: none;
+}

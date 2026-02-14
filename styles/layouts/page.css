@@ -1,0 +1,381 @@
+/**
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ * 📄 NIS2 PAGE LAYOUT SYSTEM
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ *
+ * Standardized page structure for consistent UX across all pages.
+ *
+ * UX Research Based Design:
+ * - 8px grid system (Material Design, Carbon, Apple HIG)
+ * - Page padding: 24px (mobile: 16px)
+ * - Section spacing: 24px between major sections
+ * - Header spacing: 8px between title and description
+ * - Content areas: 16px gap for related content
+ *
+ * Sources:
+ * - Material Design 3: Layout spacing guidelines
+ * - Carbon Design System: Page layout patterns
+ * - CMS Design System: Spacing guidelines
+ * - Cieden: Spacing best practices (8pt grid)
+ *
+ * Page Structure Hierarchy:
+ * ┌─────────────────────────────────────────┐
+ * │ .page (container)                       │
+ * │ ├── .page-header                        │
+ * │ │   ├── .page-header-content            │
+ * │ │   │   ├── h1.page-title               │
+ * │ │   │   └── p.page-description          │
+ * │ │   └── .page-header-actions (optional) │
+ * │ └── .page-content                       │
+ * │     ├── Section 1                       │
+ * │     ├── Section 2                       │
+ * │     └── ...                             │
+ * └─────────────────────────────────────────┘
+ * ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ */
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   CSS CUSTOM PROPERTIES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+:root {
+  /* Page Container */
+  --page-padding-x: 1.5rem; /* 24px - horizontal padding */
+  --page-padding-y: 1.5rem; /* 24px - vertical padding */
+  --page-max-width: 1440px; /* Max content width */
+
+  /* Page Header */
+  --page-header-gap: 0.5rem; /* 8px - title to description */
+  --page-header-margin-bottom: 1.5rem; /* 24px - header to content */
+
+  /* Page Sections */
+  --page-section-gap: 1.5rem; /* 24px - between sections */
+  --page-content-gap: 1rem; /* 16px - within sections */
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PAGE CONTAINER
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+@layer components {
+  /**
+   * .page - Main page container
+   *
+   * Usage:
+   * <div className="page">
+   *   <div className="page-header">...</div>
+   *   <div className="page-content">...</div>
+   * </div>
+   */
+  .page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 100%;
+    padding: var(--page-padding-y) var(--page-padding-x);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE HEADER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * .page-header - Page header with title, description, and optional actions
+   *
+   * Usage:
+   * <div className="page-header">
+   *   <div className="page-header-content">
+   *     <h1 className="page-title">Page Title</h1>
+   *     <p className="page-description">Description text</p>
+   *   </div>
+   *   <div className="page-header-actions">
+   *     <Button>Action</Button>
+   *   </div>
+   * </div>
+   */
+  .page-header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; /* 16px - between content and actions on mobile */
+    margin-bottom: var(--page-header-margin-bottom);
+  }
+
+  /* Desktop: Header content and actions side by side */
+  @media (min-width: 640px) {
+    .page-header {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1.5rem; /* 24px - between content and actions */
+    }
+  }
+
+  /**
+   * .page-header-content - Title and description wrapper
+   */
+  .page-header-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--page-header-gap);
+    flex: 1;
+    min-width: 0; /* Allow text truncation */
+  }
+
+  /**
+   * .page-header-actions - Action buttons container
+   */
+  .page-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* 8px - between buttons */
+    flex-shrink: 0;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE TITLE & DESCRIPTION
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * .page-title - Main page heading (H1)
+   * Font: 24px semibold (responsive: 28px on desktop)
+   */
+  .page-title {
+    font-size: 1.5rem; /* 24px - mobile */
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  @media (min-width: 640px) {
+    .page-title {
+      font-size: 1.75rem; /* 28px - desktop */
+    }
+  }
+
+  /**
+   * .page-description - Page subtitle/description
+   * Font: 14px regular, muted color
+   */
+  .page-description {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+
+  @media (min-width: 640px) {
+    .page-description {
+      font-size: 0.9375rem; /* 15px - slightly larger on desktop */
+    }
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE CONTENT
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * .page-content - Main content area
+   *
+   * Usage:
+   * <div className="page-content">
+   *   <Card>Section 1</Card>
+   *   <Card>Section 2</Card>
+   * </div>
+   */
+  .page-content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--page-section-gap);
+    flex: 1;
+  }
+
+  /**
+   * .page-section - Major section within page
+   * Use for grouping related content
+   */
+  .page-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--page-content-gap);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     SECTION HEADERS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * .section-header - Section title with optional actions
+   */
+  .section-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem; /* 4px */
+  }
+
+  @media (min-width: 640px) {
+    .section-header {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem; /* 16px */
+    }
+  }
+
+  .section-title {
+    font-size: 1.125rem; /* 18px */
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+  }
+
+  .section-description {
+    font-size: 0.875rem; /* 14px */
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     PAGE VARIANTS
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * .page--compact - Reduced padding for dense UIs
+   */
+  .page--compact {
+    --page-padding-x: 1rem; /* 16px */
+    --page-padding-y: 1rem; /* 16px */
+    --page-header-margin-bottom: 1rem; /* 16px */
+    --page-section-gap: 1rem; /* 16px */
+  }
+
+  /**
+   * .page--wide - Full width without max-width
+   */
+  .page--wide {
+    max-width: none;
+  }
+
+  /**
+   * .page--centered - Centered content with max-width
+   */
+  .page--centered {
+    max-width: var(--page-max-width);
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /**
+   * .page--no-padding - No padding (for full-bleed content)
+   */
+  .page--no-padding {
+    padding: 0;
+  }
+
+  /* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     FIXED PAGE FOOTER
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+  /**
+   * .page-footer-fixed - Fixed footer at bottom of page
+   * Accounts for sidebar on desktop
+   *
+   * Usage:
+   * <div className="page-footer-fixed">
+   *   <Button>Back</Button>
+   *   <Button>Next</Button>
+   * </div>
+   */
+  .page-footer-fixed {
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem var(--page-padding-x);
+    background-color: var(--background);
+  }
+
+  /* Desktop: Account for sidebar width */
+  @media (min-width: 768px) {
+    .page-footer-fixed {
+      left: var(--sidebar-width, 16rem);
+    }
+  }
+
+  /**
+   * .page--has-fixed-footer - Add padding to page content when using fixed footer
+   */
+  .page--has-fixed-footer {
+    padding-bottom: 5rem; /* 80px - footer height + buffer */
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   RESPONSIVE ADJUSTMENTS
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+
+/* Mobile: Tighter spacing */
+@media (max-width: 639px) {
+  :root {
+    --page-padding-x: 1rem; /* 16px */
+    --page-padding-y: 1rem; /* 16px */
+    --page-header-margin-bottom: 1rem; /* 16px */
+    --page-section-gap: 1rem; /* 16px */
+  }
+}
+
+/* Large screens: More generous spacing */
+@media (min-width: 1280px) {
+  :root {
+    --page-padding-x: 2rem; /* 32px */
+    --page-padding-y: 1.5rem; /* 24px */
+    --page-section-gap: 2rem; /* 32px */
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   📚 USAGE EXAMPLES
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+   STANDARD PAGE:
+   ```tsx
+   <div className="page">
+     <div className="page-header">
+       <div className="page-header-content">
+         <h1 className="page-title">Products</h1>
+         <p className="page-description">Manage your product catalog</p>
+       </div>
+       <div className="page-header-actions">
+         <Button>Add Product</Button>
+       </div>
+     </div>
+     <div className="page-content">
+       <Card>Content here</Card>
+     </div>
+   </div>
+   ```
+
+   SIMPLE PAGE (no actions):
+   ```tsx
+   <div className="page">
+     <div className="page-header">
+       <div className="page-header-content">
+         <h1 className="page-title">Dashboard</h1>
+         <p className="page-description">Welcome back!</p>
+       </div>
+     </div>
+     <div className="page-content">
+       <Card>Content</Card>
+     </div>
+   </div>
+   ```
+
+   COMPACT PAGE:
+   ```tsx
+   <div className="page page--compact">
+     ...
+   </div>
+   ```
+
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
