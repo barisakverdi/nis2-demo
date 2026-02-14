@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import {
@@ -42,6 +42,14 @@ export default function Home() {
   const { logout, isLoading } = useAuth()
   const [currentStep, setCurrentStep] = useState(1)
 
+  // Scroll to current step when it changes (from sidebar click)
+  useEffect(() => {
+    const element = document.getElementById(`step-${currentStep}`)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "center" })
+    }
+  }, [currentStep])
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -65,24 +73,24 @@ export default function Home() {
   const currentStepData = assessmentSteps.find((s) => s.step === currentStep) || assessmentSteps[0]
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex h-screen bg-slate-50">
       {/* Left Sidebar - Stepper */}
       <aside className="w-100 bg-white border-r border-slate-200 flex flex-col">
         {/* Header */}
-        <div className="p-6 border-b border-slate-200">
-          <div className="flex items-center justify-between mb-6">
-            <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center w-10 h-10 rounded-button bg-primary">
-                <Shield className="h-5 w-5 text-primary-foreground" />
+        <div className="p-6">
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2.5">
+              <div className="flex items-center justify-center w-8 h-8 rounded-button bg-primary">
+                <Shield className="h-4 w-4 text-primary-foreground" />
               </div>
-              <span className="text-h4 font-semibold">NIS2 Demo</span>
+              <span className="text-body-lg font-semibold">NIS2 Demo</span>
             </div>
             <Button variant="ghost" size="icon" onClick={logout} title="Logout">
-              <LogOut className="h-5 w-5" />
+              <LogOut className="h-4 w-4" />
             </Button>
           </div>
           <div>
-            <h1 className="text-h4 font-semibold mb-2">Cybersecurity Assessment</h1>
+            <h1 className="text-h5 font-semibold mb-1.5">Cybersecurity Assessment</h1>
             <p className="text-body-sm text-muted-foreground">
               Complete all categories to evaluate your organization's security posture
             </p>
@@ -103,6 +111,7 @@ export default function Home() {
               {assessmentSteps.map((item, index) => (
                 <StepperItem
                   key={item.step}
+                  id={`step-${item.step}`}
                   step={item.step}
                   disabled={item.step > currentStep}
                   className="pb-0"
@@ -128,7 +137,7 @@ export default function Home() {
             <p className="text-[13px] text-primary font-medium uppercase tracking-wider mb-2">
               CATEGORY {currentStep} OF {assessmentSteps.length}
             </p>
-            <h2 className="text-h2 font-semibold tracking-tight">
+            <h2 className="text-h3 font-semibold tracking-tight">
               {currentStepData.title}
             </h2>
           </div>
@@ -146,7 +155,7 @@ export default function Home() {
         </div>
 
         {/* Navigation Footer */}
-        <footer className="sticky bottom-0 z-20 bg-white border-t border-slate-200 p-6">
+        <footer className="sticky bottom-0 z-20 p-6">
           <div className="flex items-center gap-6">
             {/* Previous Button */}
             <Button
